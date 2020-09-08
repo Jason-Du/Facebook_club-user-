@@ -1,0 +1,75 @@
+
+分享
+<div class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh gpro0wi8 dwo3fsh8 ow4ym5g4 auili1gw du4w35lb gmql0nx0" role="button" tabindex="0" style=""><span class="oi732d6d ik7dh3pa d2edcug0 hpfvmrgz qv66sw1b c1et5uql a8c37x1j muag1w35 ew0dbk1b jq4qci2q a3bd9o3v knj5qynh m9osqain" dir="auto">3次分享</span></div>
+------------------------------------SPAN----------------------------------
+
+
+
+<span class="oi732d6d ik7dh3pa d2edcug0 hpfvmrgz qv66sw1b c1et5uql a8c37x1j muag1w35 ew0dbk1b jq4qci2q a3bd9o3v knj5qynh m9osqain" dir="auto">6則留言</span>
+<span class="oi732d6d ik7dh3pa d2edcug0 hpfvmrgz qv66sw1b c1et5uql a8c37x1j muag1w35 ew0dbk1b jq4qci2q a3bd9o3v knj5qynh m9osqain" dir="auto">1 則留言</span>
+
+
+---------------------------------------XPATH
+分享
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[1]/div/div[1]/div/div[3]/div/span/div/span
+
+
+----------------------------------------------檢視所有留言
+
+上端展開點開
+一般
+上端展開
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[8]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[79]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[79]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+下端展開點開
+
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[117]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[3]/div/div[2]																													#div[] 為第幾則貼文
+-----貼文位置
+																														#div[] 為第幾則貼文																			
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+
+----------------------------------------------留言下的回覆
+#則回覆																													#div[] 為第幾則貼文
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[7]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[8]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+																													#div[] 為第幾則貼文																# li[] 為 第幾個留言者
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+
+#檢視另外幾則留言
+																															#div[] 為第幾則貼文																# li[] 為 第幾個留言者
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[8]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[5]/div[2]/div/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[18]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div/div[2]
+
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[22]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[7]/div[2]/div/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[22]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div/div[2] 
+
+---------------------------------------------EMOJI
+																															  #div[] 為第幾則貼文	
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[7]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div
+																								 #div[] 為第幾個回覆者
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[3]/div[1]/div[1]/div/div/div[2]/div[1]/div/div/div/span/div/a
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[3]/div[1]/div[2]/div/div/div[2]/div[1]/div/div/div/span/div/a
+
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[3]/div[1]/div[2]/div/div/div[2]/div[1]/div/div/div/span/div/a
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[3]/div[1]/div[3]/div/div/div[2]/div[1]/div/div/div/span/div/a
+
+------------------------------------------置頂EMoJI
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[1]/div/div[1]/div/div[1]/div/span/div
+
+
+
+-----------------------------------close click --------------------------------------------------
+
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[2]/div
+/html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[2]/div
+
+
+
+
