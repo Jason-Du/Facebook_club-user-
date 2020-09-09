@@ -1,6 +1,6 @@
 
-------------------------------------SPAN----------------------------------
-
+留言展開SPAN------------------------------------------
+																										#div[] 為第幾則貼文
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[2]/span[2]/div
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[2]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[5]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[2]/span[2]/div
 
@@ -15,8 +15,8 @@
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[2]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
-
-
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[2]/div/div[2]
 下端展開點開
 																												#div[] 為第幾則貼文
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[61]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[3]/div/div[2]
@@ -24,17 +24,55 @@
 																											
 -----貼文位置
 																														#div[] 為第幾則貼文																			
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div[2]/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div
+
 
 ----------------------------------------------留言下的回覆
-#則回覆																													#div[] 為第幾則貼文
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div[2]
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[7]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[8]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
-																													#div[] 為第幾則貼文																# li[] 為 第幾個留言者
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[1]/div[2]/div/div/div[2]
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div[2]/div/div[2]/div[3]/div/div/div[2]/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[5]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+====================================================================================#則回覆PARENT=======================================================================================
+NONE			
+
+留言為貼圖 圖片 OR 圖片連結
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[1]/div/div[2]/div[1]/div[1]/div/div/span/div/a/span/span
+
+
+留言為文字
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div[1]/div/div[3]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[1]/div/div[2]/div[2]/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[6]/div[1]/div/div[2]/div[2]/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[2]/div/div/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[11]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[7]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[10]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[3]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[11]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[3]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+
+
+XXX回復
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div /div/div[1]/div[2]/div/div[3]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[12]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[41]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[13]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[12]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[6]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[12]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[9]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[11]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+#夾層
+
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[170]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[107]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[5]/div[1]/div/div[2]/div/div[1]/div/div/div/div/span/div/a/span/span
+
+
+#檢視另X則留言
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[21]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[1]/div/div[2]/div/div[1]/div/div[1]/div/div/span/div/a/span/span
+
+
+
+===============================================================================#則回覆PARENT======================================================================================
+
 
 #檢視另X則留言
 夾層																							#div[] 為第幾則貼文																	# li[] 為 第幾個留言者下 li NONE開始
@@ -43,17 +81,27 @@
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[113]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[2]/div/div[1]/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[113]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[3]/div[2]/div/div[1]/div[2]
 一般
+																				#div[] 為第幾則貼文																				# li[] 為 第幾個留言者下 1 開始
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[20]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[2]/div/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[43]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[18]/div[2]/div/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[43]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[2]/div/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[88]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[13]/div[2]/div/div/div/div[2]
-/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[107]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[3]/div[2]/div/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[10]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[3]/div[2]/div/div/div/div[2]
 
-XXX 已回覆另外幾則留言
-																									#div[] 為第幾則貼文														# li[] 為 第幾個留言者下 1 開始
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[28]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[2]/div/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+
+
+XXX 已回覆另外幾則留言																					#div[] 為第幾則貼文														# li[] 為 第幾個留言者下 NONE 開始
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[43]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[25]/div[2]/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[50]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[2]/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[50]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[107]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[2]/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[300]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[2]/div/div/div[2]
+/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[11]/div[2]/div/div/div[2]
+
+
+
 
 ---------------------------------------------EMOJI
 																									#div[] 為第幾則貼文	
@@ -68,7 +116,7 @@ XXX 已回覆另外幾則留言
 /html/body/div[1]/div/div[1]/div[1]/div[4]/div/div/div[1]/div/div[2]/div/div/div/div[2]/div
 
 
-回覆的留言																									#div[] 為第幾則貼文														# li[] 為 第幾個留言者下 1 開始
+回覆的留言	NOTE comment 也需要展開																								#div[] 為第幾則貼文														# li[] 為 第幾個留言者下 1 開始
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[116]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[1]/div/div[2]/div/div[1]/div/div/div/div/div/span/div/div
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[117]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[1]/div[1]/div/div[2]/div/div[1]/div/div/div/div/div/span/div/div
 /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[117]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[2]/div[1]/div/div[2]/div/div[1]/div/div/div/div/div/span/div/div
