@@ -69,18 +69,26 @@ class Click_more_comment():
 		pass
 		for comment_index in range(1,self.post_num):
 			try:
-				post = self.driver.find_element_by_xpath(self.post_location_path.format(comment_index))
-				self.driver.execute_script("arguments[0].scrollIntoView(true);", post)
+				if comment_index==2:
+					pass
+				else:
+					# os.system('pause')
+					post = self.driver.find_element_by_xpath(self.post_location_path.format(comment_index))
+					self.driver.execute_script("arguments[0].scrollIntoView(true);", post)
 				print("POST:{} ON GOING".format(comment_index))
+				# Btns_all_comment = self.driver.find_element_by_xpath(self.Btns_all_comment_path.format(comment_index))
+				# Btns_all_comment.click()
 			except:
 				print("NO POST")
 				continue
-			for respondent_index in range(30):
+			for respondent_index in range(1,30):
 				try:
-					Btns_all_comment = self.driver.find_element_by_xpath(self.Btns_all_comment_path.format(comment_index))
-					Btns_all_comment.click()
-					comment_locate = self.driver.find_element_by_xpath(self.comment_location_path.format(comment_index,respondent_index))
-					self.driver.execute_script("arguments[0].scrollIntoView(true);", comment_locate)
+					# 一般型展開留言
+					if respondent_index==1:
+						pass
+					else:
+						comment_locate = self.driver.find_element_by_xpath(self.comment_location_path.format(comment_index,respondent_index-1))
+						self.driver.execute_script("arguments[0].scrollIntoView(true);", comment_locate)
 					print("comment index:{} respondent_index:{} is ongoing".format(comment_index,respondent_index))
 					time.sleep(1)
 					Btn_below_comment=self.driver.find_element_by_xpath(self.Btn_below_comment.format(comment_index,respondent_index))
@@ -90,27 +98,30 @@ class Click_more_comment():
 					print("***************************************")
 				except:
 					pass
-				try:
-					Btn_below_name_comment=self.driver.find_element_by_xpath(self.Btn_below_name_comment.format(comment_index,respondent_index))
-					print("captureBtn_below_name_comment".format(respondent_index))
-					Btn_below_name_comment.click()
-					print("***************************************")
-					print("Click_below_name index:{} respondent_index:{}".format(comment_index,respondent_index))
-					print("***************************************")
-					time.sleep(1)
-				except:
-					pass
-				try:
-					Btn_below_sandwich_comment=self.driver.find_element_by_xpath(self.Btn_below_sandwich_comment.format(comment_index,respondent_index))
-					print("capturebelow_sandwich_comment".format(respondent_index))
-					Btn_below_sandwich_comment.click()
+					try:
+						# XXX回復型展開留言
 
-					print("***************************************")
-					print("Click_below_sandwich index:{} respondent_index:{}".format(comment_index, respondent_index))
-					print("***************************************")
-					time.sleep(1)
-				except:
-					pass
+						Btn_below_name_comment=self.driver.find_element_by_xpath(self.Btn_below_name_comment.format(comment_index,respondent_index))
+						print("capture  Btn_below_name_comment:{}".format(respondent_index))
+						# os.system("pause")
+						Btn_below_name_comment.click()
+						print("***************************************")
+						print("Click_below_name index:{} respondent_index:{}".format(comment_index,respondent_index))
+						print("***************************************")
+						time.sleep(1)
+					except:
+						pass
+						try:
+							# 夾層型展開留言
+							Btn_below_sandwich_comment=self.driver.find_element_by_xpath(self.Btn_below_sandwich_comment.format(comment_index,respondent_index))
+							print("capture  below_sandwich_comment:{}".format(respondent_index))
+							Btn_below_sandwich_comment.click()
+							print("***************************************")
+							print("Click_below_sandwich index:{} respondent_index:{}".format(comment_index, respondent_index))
+							print("***************************************")
+							time.sleep(1)
+						except:
+							pass
 		htmltext= self.driver.page_source
 		return htmltext
 
@@ -308,12 +319,14 @@ if __name__ == '__main__':
 		post_location_path_input="/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[{}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[2]/div/div[3]/div",
 
 		Btn_below_comment_input="/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[{}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[{}]/div[2]/div/div/div/div[2]",
+
 		Btn_below_name_commemt_input="/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[{}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[{}]/div[2]/div/div/div[2]",
+		# 						     /html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[2]/div/div/div[2]
 
 		Btn_sandwich_comment_input="/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[{}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[{}]/div[2]/div/div[1]/div[2]",
 
 		comment_location_path_input="/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[{}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[{}]/div[1]/div/div[2]/div/div[2]/div/div",
-
+		# 							/html/body/div[1]/div/div[1]/div[1]/div[3]/div/div/div[1]/div[1]/div[4]/div/div/div/div/div[1]/div[2]/div/div[4]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/ul/li[4]/div[1]/div/div[2]/div
 		post_num_input=5,
 
 		driver_input=driver
@@ -340,6 +353,33 @@ if __name__ == '__main__':
 	driver.execute_script("window.scroll(0, 0);")
 	time.sleep(1)
 	htmltext=Test.Click_comment_below()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	# Comment_test = Check_comment(htmltext_input=htmltext,
 	#
 	# 							 post_path_input='div[class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]',
