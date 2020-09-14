@@ -150,37 +150,43 @@ def make_post_dict(html_doc):
 						comment_main=re.findall(pattern,str(comment))
 						comment_main_content_list=re.findall(pattern_content,str(comment))
 						comment_main_content=''.join([str(x) for x in comment_main_content_list])
-						pattern2=r'{}(Author)?(.+?)\d?\s·'.format(comment_main)
+						print(comment_main)
+						pattern2=r'{}(Author)?(.+?)\d?\s·'.format(comment_main[0])
 						comment_main_content2=re.findall(pattern2,comment_main_content)[0][1]
 						print('content:{}'.format(comment_main_content2))
 					except:
 						print("FAIL 1 STAGE")
-						print(comment_main_content)
+						# print(comment_main_content)
 			if index ==1:
 				# 留言下的留言
 				allcomment_comment = post.select(label)
+
 				for comment_below in allcomment_comment:
 					pattern = r'Reply by (.*?) '
 					comment_below_name_list=re.findall(pattern,str(comment_below))
 					print('comment_below_name:{}'.format(comment_below_name_list))
 					for index,comment_below_name in enumerate(comment_below_name_list):
 						try:
+							comment_below2=comment_below.select('div[class="_6cuy"]')[index]
 							pattern_below_content = r'>(.*?)<'
-							comment_below_content_list1 = re.findall(pattern_below_content, str(comment_below))
+							comment_below_content_list1 = re.findall(pattern_below_content, str(comment_below2))
 							comment_below_content = ''.join([str(x) for x in comment_below_content_list1])
-							pattern2 = r'{}(Author)?(.+?)\d?\s·'.format(comment_below_name)
-							comment_below_content2=re.findall(pattern2,comment_below_content[index][1])
+							pattern2 =r'{}(Author)?(.*)'.format(comment_below_name)
+							comment_below_content2=re.findall(pattern2,comment_below_content)[0][1]
+							# comment_below_content2=re.findall(pattern_below_content,comment_below2)
 							print('comment_below_content:{}'.format(comment_below_content2))
 						except:
 							print("FAIL 2 STAGE")
-							print:(comment_below_content)
+							comment_below_content2=[]
+
+
 
 		# dataset.append(post_dict)
 
 
 
 
-	print(dataset)
+	# print(dataset)
 
 
 
