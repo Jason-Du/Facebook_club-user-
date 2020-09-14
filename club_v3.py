@@ -155,8 +155,9 @@ def make_post_dict(html_doc):
 						comment_main_content2=re.findall(pattern2,comment_main_content)[0][1]
 						print('content:{}'.format(comment_main_content2))
 					except:
-						print("FAIL 1 STAGE")
+						# print("FAIL 1 STAGE")
 						# print(comment_main_content)
+						comment_main_content2=[]
 			if index ==1:
 				# 留言下的留言
 				allcomment_comment = post.select(label)
@@ -176,7 +177,7 @@ def make_post_dict(html_doc):
 							# comment_below_content2=re.findall(pattern_below_content,comment_below2)
 							print('comment_below_content:{}'.format(comment_below_content2))
 						except:
-							print("FAIL 2 STAGE")
+							# print("FAIL 2 STAGE")
 							comment_below_content2=[]
 
 
