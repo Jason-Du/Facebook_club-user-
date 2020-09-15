@@ -54,24 +54,6 @@ def make_post_dict(html_doc):
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	# post dict list
 	dataset=[]
-	comment_below_dict_list=[]
-	comment_dict_list=[]
-	label_list=[]
-	comment_below_dict={'comment id':'',
-		'comment content':'',
-		'comment link':'',
-		'comment sticker':'',
-		'comment img':''
-
-	}
-	comment_dict={
-		'comment id':'',
-		'comment content':'',
-		'comment link':'',
-		'comment sticker':'',
-		'comment img':'',
-		'comment_below':comment_below_dict_list
-	}
 	# reaction_dict={
 	# 	'like id': '',
 	# 	'angry id':'',
@@ -86,7 +68,10 @@ def make_post_dict(html_doc):
 	allpost=body.select('div[class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]')
 
 	print(len(allpost))
-	for post in allpost:
+	for index_post,post in enumerate(allpost):
+		print('POST:{}ON GOING'.format(index_post))
+		comment_below_dict_list = []
+		comment_dict_list = []
 		post_dict = {
 			'poster': '',
 			'post content': '',
@@ -136,7 +121,11 @@ def make_post_dict(html_doc):
 		# 			else:
 		# 				post_dict['comment number']=0
 		# 		print(post_dict)
-		# comment
+
+
+
+		# ##################################comment
+		# 主留言 與 留言下留言分類區塊
 		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
 						   'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
 		for index,label in enumerate(comment_labellist):
@@ -144,69 +133,149 @@ def make_post_dict(html_doc):
 				# 主留言
 				allcomment = post.select(label)
 				for comment in allcomment:
+
+					comment_dict = {
+						'comment_id': '',
+						'comment_content': '',
+						'comment_link_num': '',
+						'comment_gif_num': '',
+						'comment_img_num': '',
+						'comment_sticker': '',
+						'comment_below': comment_below_dict_list
+					}
+					# comment 為 單個的主流言
 					try:
-						pattern=r'div aria-label="Comment by (.*?) '
+						pass
+						pattern = r'div aria-label="Comment by (.+?) '
 						pattern_content = r'>(.*?)<'
 						comment_main=re.findall(pattern,str(comment))
-						comment_main_content_list=re.findall(pattern_content,str(comment))
-						comment_main_content=''.join([str(x) for x in comment_main_content_list])
-						print(comment_main)
-						pattern2=r'{}(Author)?(.+?)\d?\s·'.format(comment_main[0])
-						comment_main_content2=re.findall(pattern2,comment_main_content)[0][1]
-						print('content:{}'.format(comment_main_content2))
+						# print("comment main name : {}".format(comment_main))
+
+						#  處理留言區塊
+						singlecomment=comment.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
+						comment_content_list1 = re.findall(pattern_content, str(singlecomment))
+						comment_content = ''.join([str(x) for x in comment_content_list1])
+						# print('comment_main content:{}'.format(comment_content))
+						# SAVE TO DICT
+						comment_dict['comment_id'] = comment_main[0]
+						comment_dict['comment_content'] = comment_content
+
 					except:
-						# print("FAIL 1 STAGE")
-						# print(comment_main_content)
-						comment_main_content2=[]
+						pass
+						print("FAIL 1 STAGE")
+					try:
+						# 處理關於流言有貼圖 link image gif
+						pass
+						singlecomment_link=comment.select('div[class="_6cuy"]')[0]
+
+						gif1=singlecomment_link.select('img[class="a8c37x1j idiwt2bm d2edcug0"]')
+						# print (len(gif1))
+
+						gif2 = singlecomment_link.select('video[class="k4urcfbm datstx6m a8c37x1j"]')
+						# print(len(gif2))
+
+						photo = singlecomment_link.select("img[class='img']")
+						# print(len(photo1))
+
+						sharelink=singlecomment_link.select("a[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl i09qtzwb n7fi1qx3 pmk7jnqg j9ispegn kr520xx4 dwzzwef6']")
+						pattern=r'<div class="_6cuy"><div aria-label="(.*?)"'
+
+						sticker_type=re.findall(pattern,str(singlecomment_link))
+						if len(sticker_type)==0:
+							sticker0=''
+						else:
+							sticker0=sticker_type[0]
+
+						# print(sticker_type)
+						# SAVE TO DICT
+
+						comment_dict['comment_gif_num'] = len(gif1) + len(gif2)
+						comment_dict['comment_img_num'] = len(photo)
+						comment_dict['comment_link_num'] = len(sharelink)
+						comment_dict['comment_sticker'] = sticker0
+
+					except:
+						print("LINK FAIL")
+						pass
+					comment_dict_list.append(comment_dict)
 			if index ==1:
+
+
 				# 留言下的留言
 				allcomment_comment = post.select(label)
+				for index_dict,comment_below in enumerate(allcomment_comment):
 
-				for comment_below in allcomment_comment:
-					pattern = r'Reply by (.*?) '
+					comment_below_dict = {'comment_id': '',
+										  'comment_content': '',
+										  'comment_link_num': '',
+										  'comment_gif_num': '',
+										  'comment_img_num': '',
+										  'comment_sticker': ''
+										  }
+
+					pattern = r'Reply by (.+?) '
 					comment_below_name_list=re.findall(pattern,str(comment_below))
-					print('comment_below_name:{}'.format(comment_below_name_list))
+					# print('comment_below_name:{}'.format(comment_below_name_list))
+				#
 					for index,comment_below_name in enumerate(comment_below_name_list):
+
+						comment_below_dict['comment_id'] = comment_below_name
+				# 		# 留言下留言 分別則數區塊分類
+						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80"]')[index]
 						try:
-							comment_below2=comment_below.select('div[class="_6cuy"]')[index]
+							comment_below3=comment_below2.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
 							pattern_below_content = r'>(.*?)<'
-							comment_below_content_list1 = re.findall(pattern_below_content, str(comment_below2))
+							comment_below_content_list1 = re.findall(pattern_below_content, str(comment_below3))
 							comment_below_content = ''.join([str(x) for x in comment_below_content_list1])
-							pattern2 =r'{}(Author)?(.*)'.format(comment_below_name)
-							comment_below_content2=re.findall(pattern2,comment_below_content)[0][1]
-							# comment_below_content2=re.findall(pattern_below_content,comment_below2)
-							print('comment_below_content:{}'.format(comment_below_content2))
+							# print('comment_below_content:{}'.format(comment_below_content))
+							comment_below_dict['comment_content']=comment_below_content
 						except:
-							# print("FAIL 2 STAGE")
-							comment_below_content2=[]
+							pass
+							print("FAIL 2 STAGE")
+						try:
+							singlecomment_link = comment_below2.select('div[class="_6cuy"]')[0]
+							gif1 = singlecomment_link.select('img[class="a8c37x1j idiwt2bm d2edcug0"]')
+							# print(len(gif1))
+							photo = singlecomment_link.select("img[class='img']")
+							# print(len(photo))
+							sharelink = singlecomment_link.select("a[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl i09qtzwb n7fi1qx3 pmk7jnqg j9ispegn kr520xx4 dwzzwef6']")
+							# print(len(sharelink))
+							gif2 = singlecomment_link.select('video[class="k4urcfbm datstx6m a8c37x1j"]')
+							# print(len(gif2))
+							pattern = r'<div class="_6cuy"><div aria-label="(.*?)"'
+							sticker_type = re.findall(pattern, str(singlecomment_link))
+							if len(sticker_type) == 0:
+								sticker0 = ''
+							else:
+								sticker0 = sticker_type[0]
+							# print(sticker_type)
+							#
+							# SAVE TO DICT
+							comment_below_dict['comment_gif_num'] = len(gif1) + len(gif2)
+							comment_below_dict['comment_img_num'] = len(photo)
+							comment_below_dict['comment_link_num'] = len(sharelink)
+							comment_below_dict['comment_sticker'] = str(sticker0)
+							pass
+						except:
+							print("LINK FAIL 2 STAGE")
+							pass
+						comment_below_dict_list.append(comment_below_dict_list)
+
+					comment_dict_split = comment_dict_list[index_dict]
+					comment_dict_split['commemt_below']=comment_below_dict_list
+					comment_dict_list[index_dict]=comment_dict_split
 
 
-
+				print(comment_dict_list[9])
+				os.system('pause')
 		# dataset.append(post_dict)
-
-
-
 
 	# print(dataset)
 
 
 
-
 def get_emoji_list():
 	pass
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
