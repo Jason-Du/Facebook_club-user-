@@ -52,8 +52,9 @@ def click_more_content(driver):
 			pass
 def make_post_dict(html_doc):
 	soup = BeautifulSoup(html_doc, 'html.parser')
-	# post dict list
+	post_dict_list=[]
 	dataset=[]
+	comment_below_dict_list = []
 	# reaction_dict={
 	# 	'like id': '',
 	# 	'angry id':'',
@@ -70,7 +71,6 @@ def make_post_dict(html_doc):
 	print(len(allpost))
 	for index_post,post in enumerate(allpost):
 		print('POST:{}ON GOING'.format(index_post))
-		comment_below_dict_list = []
 		comment_dict_list = []
 		post_dict = {
 			'poster': '',
@@ -128,8 +128,8 @@ def make_post_dict(html_doc):
 		# 主留言 與 留言下留言分類區塊
 		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
 						   'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
-		for index,label in enumerate(comment_labellist):
-			if index==0:
+		for index_label,label in enumerate(comment_labellist):
+			if index_label==0:
 				# 主留言
 				allcomment = post.select(label)
 				for comment in allcomment:
@@ -141,7 +141,7 @@ def make_post_dict(html_doc):
 						'comment_gif_num': '',
 						'comment_img_num': '',
 						'comment_sticker': '',
-						'comment_below': comment_below_dict_list
+						'comment_below': '',
 					}
 					# comment 為 單個的主流言
 					try:
@@ -198,30 +198,27 @@ def make_post_dict(html_doc):
 						print("LINK FAIL")
 						pass
 					comment_dict_list.append(comment_dict)
-			if index ==1:
-
-
-				# 留言下的留言
+			if index_label ==1:
+				# 留言下的留言區塊
 				allcomment_comment = post.select(label)
 				for index_dict,comment_below in enumerate(allcomment_comment):
-
-					comment_below_dict = {'comment_id': '',
-										  'comment_content': '',
-										  'comment_link_num': '',
-										  'comment_gif_num': '',
-										  'comment_img_num': '',
-										  'comment_sticker': ''
-										  }
-
+					comment_below_dict_list = []
 					pattern = r'Reply by (.+?) '
 					comment_below_name_list=re.findall(pattern,str(comment_below))
-					# print('comment_below_name:{}'.format(comment_below_name_list))
-				#
-					for index,comment_below_name in enumerate(comment_below_name_list):
 
+					print('comment_below_name:{}'.format(comment_below_name_list))
+				# 	留言下的single留言區塊 姓名
+					for index_below,comment_below_name in enumerate(comment_below_name_list):
+						comment_below_dict = {'comment_id':'',
+											  'comment_content':'',
+											  'comment_link_num':'',
+											  'comment_gif_num':'',
+											  'comment_img_num':'',
+											  'comment_sticker':''
+											  }
 						comment_below_dict['comment_id'] = comment_below_name
-				# 		# 留言下留言 分別則數區塊分類
-						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80"]')[index]
+				# 		#留言下的single留言區塊 下的留言區塊
+						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80"]')[index_below]
 						try:
 							comment_below3=comment_below2.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
 							pattern_below_content = r'>(.*?)<'
@@ -248,7 +245,6 @@ def make_post_dict(html_doc):
 								sticker0 = ''
 							else:
 								sticker0 = sticker_type[0]
-							# print(sticker_type)
 							#
 							# SAVE TO DICT
 							comment_below_dict['comment_gif_num'] = len(gif1) + len(gif2)
@@ -259,15 +255,14 @@ def make_post_dict(html_doc):
 						except:
 							print("LINK FAIL 2 STAGE")
 							pass
-						comment_below_dict_list.append(comment_below_dict_list)
-
-					comment_dict_split = comment_dict_list[index_dict]
-					comment_dict_split['commemt_below']=comment_below_dict_list
-					comment_dict_list[index_dict]=comment_dict_split
+						comment_below_dict_list.append(comment_below_dict)
+					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
+					print(comment_dict_list[index_dict])
 
 
-				print(comment_dict_list[9])
 				os.system('pause')
+
+
 		# dataset.append(post_dict)
 
 	# print(dataset)
