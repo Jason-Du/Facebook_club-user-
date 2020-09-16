@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import time
 import re
+import json
 
 def click_more_comment(driver):
 	pass
@@ -27,7 +28,7 @@ def click_more_comment(driver):
 			except:
 				print("FAIL FIND LOCATION")
 		except:
-			print("NO more_comment BUTTON")
+			print("NO more comment BUTTON")
 			pass
 
 
@@ -52,9 +53,7 @@ def click_more_content(driver):
 			pass
 def make_post_dict(html_doc):
 	soup = BeautifulSoup(html_doc, 'html.parser')
-	post_dict_list=[]
-	dataset=[]
-	comment_below_dict_list = []
+	dataset = []
 	# reaction_dict={
 	# 	'like id': '',
 	# 	'angry id':'',
@@ -77,50 +76,50 @@ def make_post_dict(html_doc):
 			'post content': '',
 			'post_share_link': '',
 			'comment number': '',
-			'reaction':'',
 			'comment': comment_dict_list
 		}
 		# PO 文者 ID
-		# poster = post.select('div[class="lzcic4wl"]')[0].get('aria-labelledby')
-		# poster=post.select('h2[id={}]'.format(str(poster)))
-		# # print(poster)
-		# pattern = r'<span>(\w+)</span>'
-		# poster = re.search(pattern, 'r'+str(poster))
-		# # print(poster.group(1)) PO文者ID
-		# post_dict['poster']=poster.group(1)
-		# #五個標籤名 PO文資訊   label_str
-		# label_str = post.select('div[class="lzcic4wl"]')[0].get('aria-describedby')
-		# pattern=r'\w{3}_\w{1}_\w{2}'
-		# label_list=re.findall(pattern,str(label_str))
-		# if (len(label_list)!=0):
-		# 	label_list.pop(0)
-		# 	label_list.pop(2)
-		# 	for index,label in enumerate(label_list):
-		# 		pass
-		# 		post_content=post.select('div[id={}]'.format(label))
-		# 		if index==0:
-		# 			# PO文內容處理
-		# 			pattern=r'>(.*?)<'
-		# 			content_list1=re.findall(pattern,str(post_content))
-		# 			content=''.join([str(x) for x in content_list1])
-		# 			# print(content)
-		# 			post_dict['post content']=content
-		# 		if index==1:
-		# 			pattern = r'href="(.*?)"'
-		# 			# content 分享連結list
-		# 			share_link=re.findall(pattern,str(post_content))
-		# 			# print(share_link)
-		# 			post_dict['post_share_link']=share_link
-		# 			pass
-		# 		if index==2:
-		# 			pattern=r'>(\d+?) Comments<'
-		# 			comment_num=re.findall(pattern,str(post_content))
-		# 			# comment_num0 為 PO文底下留言數量
-		# 			if len(comment_num)!=0:
-		# 				post_dict['comment number']=comment_num[0]
-		# 			else:
-		# 				post_dict['comment number']=0
-		# 		print(post_dict)
+		poster = post.select('div[class="lzcic4wl"]')[0].get('aria-labelledby')
+		poster=post.select('h2[id={}]'.format(str(poster)))[0].select('div[class="nc684nl6"]')
+		pattern = r'>(.*?)<'
+		poster_list = re.findall(pattern,str(poster))
+		poster_name=''.join([str(x) for x in poster_list])
+		# print(poster_name)
+		# PO文者ID
+		post_dict['poster']=poster_name
+		#五個標籤名 PO文資訊   label_str
+		label_str = post.select('div[class="lzcic4wl"]')[0].get('aria-describedby')
+		pattern=r'\w{3}_\w{1}_\w{2}'
+		label_list=re.findall(pattern,str(label_str))
+		if (len(label_list)!=0):
+			label_list.pop(0)
+			label_list.pop(2)
+			for index,label in enumerate(label_list):
+				pass
+				post_content=post.select('div[id={}]'.format(label))
+				if index==0:
+					# PO文內容處理
+					pattern=r'>(.*?)<'
+					content_list1=re.findall(pattern,str(post_content))
+					content=''.join([str(x) for x in content_list1])
+					# print(content)
+					post_dict['post content']=content
+				if index==1:
+					pattern = r'href="(.*?)"'
+					# content 分享連結list
+					share_link=re.findall(pattern,str(post_content))
+					# print(share_link)
+					post_dict['post_share_link']=share_link
+					pass
+				if index==2:
+					pattern=r'>(\d+?) Comments<'
+					comment_num=re.findall(pattern,str(post_content))
+					# comment_num0 為 PO文底下留言數量
+					if len(comment_num)!=0:
+						post_dict['comment number']=comment_num[0]
+					else:
+						post_dict['comment number']=0
+				# print(post_dict)
 
 
 
@@ -206,7 +205,8 @@ def make_post_dict(html_doc):
 					pattern = r'Reply by (.+?) '
 					comment_below_name_list=re.findall(pattern,str(comment_below))
 
-					print('comment_below_name:{}'.format(comment_below_name_list))
+
+					# print('comment_below_name:{}'.format(comment_below_name_list))
 				# 	留言下的single留言區塊 姓名
 					for index_below,comment_below_name in enumerate(comment_below_name_list):
 						comment_below_dict = {'comment_id':'',
@@ -257,15 +257,20 @@ def make_post_dict(html_doc):
 							pass
 						comment_below_dict_list.append(comment_below_dict)
 					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
-					print(comment_dict_list[index_dict])
+					# 列印出該則PO文底下的所有留言
+					# print(comment_dict_list[index_dict])
 
 
-				os.system('pause')
 
+		post_dict['comment']=comment_dict_list
+		# 列印出該則PO文底下的所有留言以及PO文
+		# print(post_dict)
 
-		# dataset.append(post_dict)
-
+		dataset.append(post_dict)
+		# print(dataset[index_post])
+		# os.system('pause')
 	# print(dataset)
+	return dataset
 
 
 
@@ -295,14 +300,22 @@ if __name__ == '__main__':
 		driver.find_element_by_id("u_0_2").click()
 
 	time.sleep(2)
-	driver.get("https://www.facebook.com/groups/342191540266126")
+	driver.get("https://www.facebook.com/groups/315124296585941")
+	# https://www.facebook.com/groups/342191540266126
+	#
 	time.sleep(2)
 	post=5
 	for i in range(post):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
 	click_more_comment(driver=driver)
-	# click_more_content(driver=driver)
+	click_more_content(driver=driver)
 	htmltext = driver.page_source
 	#
-	make_post_dict(html_doc=htmltext)
+	dataset=make_post_dict(html_doc=htmltext)
+
+	with open('result.json', 'w') as fp:
+		json.dump(dataset, fp)
+
+
+
