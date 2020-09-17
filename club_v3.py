@@ -20,7 +20,7 @@ def click_more_comment(driver):
 													  )
 				for j in more_comment:
 					try:
-						driver.execute_script("arguments[0].scrollIntoView(false);", j)
+						driver.execute_script("arguments[0].scrollIntoView(false);",j)
 						time.sleep(1)
 						j.click()
 					except:
@@ -28,7 +28,6 @@ def click_more_comment(driver):
 			except:
 				print("FAIL FIND LOCATION")
 		except:
-			print("NO more comment BUTTON")
 			pass
 
 
@@ -51,32 +50,25 @@ def click_more_content(driver):
 		except:
 			print("NO more_content BUTTON")
 			pass
-def make_post_dict(html_doc):
+def make_post_dict(html_doc,driver):
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	dataset = []
-	# reaction_dict={
-	# 	'like id': '',
-	# 	'angry id':'',
-	# 	'haha id': '',
-	# 	'care id':'',
-	# 	'love id':'',
-	# 	'sad id': '',
-	# 	'wow id': '',
-	# 	}
 
 	body = soup.find('body')
 	allpost=body.select('div[class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]')
 
 	print(len(allpost))
 	for index_post,post in enumerate(allpost):
-		print('POST:{}ON GOING'.format(index_post))
+		print('POST:{} IS ON GOING'.format(index_post))
 		comment_dict_list = []
+		reaction_list=[]
 		post_dict = {
 			'poster': '',
-			'post content': '',
+			'post_content': '',
 			'post_share_link': '',
-			'comment number': '',
-			'comment': comment_dict_list
+			'comment_number': '',
+			'comment': comment_dict_list,
+			'reaction':reaction_list
 		}
 		# PO 文者 ID
 		poster = post.select('div[class="lzcic4wl"]')[0].get('aria-labelledby')
@@ -103,7 +95,7 @@ def make_post_dict(html_doc):
 					content_list1=re.findall(pattern,str(post_content))
 					content=''.join([str(x) for x in content_list1])
 					# print(content)
-					post_dict['post content']=content
+					post_dict['post_content']=content
 				if index==1:
 					pattern = r'href="(.*?)"'
 					# content 分享連結list
@@ -116,14 +108,14 @@ def make_post_dict(html_doc):
 					comment_num=re.findall(pattern,str(post_content))
 					# comment_num0 為 PO文底下留言數量
 					if len(comment_num)!=0:
-						post_dict['comment number']=comment_num[0]
+						post_dict['comment_number']=comment_num[0]
 					else:
-						post_dict['comment number']=0
+						post_dict['comment_number']=0
 				# print(post_dict)
 
 
 
-		# ##################################comment
+		# ----------------------------------------------------------Comment---------------------------------------------------------------------------
 		# 主留言 與 留言下留言分類區塊
 		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
 						   'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
@@ -258,24 +250,90 @@ def make_post_dict(html_doc):
 						comment_below_dict_list.append(comment_below_dict)
 					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
 					# 列印出該則PO文底下的所有留言
+
 					# print(comment_dict_list[index_dict])
-
-
 
 		post_dict['comment']=comment_dict_list
 		# 列印出該則PO文底下的所有留言以及PO文
 		# print(post_dict)
 
+
+
+		# -------------------------------------------------------------------GETTING EMOJI-----------------------------------------------------
+		emoji_post_list=[]
+		reaction_list=get_emoji_list(driver=driver, post_index=index_post)
+		post_dict['reaction']=reaction_list
 		dataset.append(post_dict)
+		# print(dataset[index_post]['reaction'])
+		os.system('pause')
 		# print(dataset[index_post])
 		# os.system('pause')
 	# print(dataset)
 	return dataset
+def get_emoji_list(driver, post_index):
+	emoji_dict_list = []
+
+	try:
+		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
+		driver.execute_script("arguments[0].scrollIntoView(false);", post)
+		emoji_button=post.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 a8c37x1j p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l gmql0nx0 ce9h75a5 ni8dbmo4 stjgntxs"]')[0]
+		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
+		time.sleep(1)
+		emoji_button.click()
+		time.sleep(1)
+	# l9j0dhe7 tkr6xdv7
+		emoji_htmltxt = driver.page_source
+		soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
+
+		emoji_window=soup_emoji.select('div[class="l9j0dhe7 tkr6xdv7"]')[0]
+
+		emoji_individual_row=emoji_window.select('div[data-visualcompletion="ignore-dynamic"]')
+		for row in emoji_individual_row:
+			emoji_dict = {'emoji_id': '',
+						  'emoji_type': ''
+						  }
+			# label1 為選取姓名區塊   label2為選取表情符號區塊
+			emoji_label_list=['div[class="q9uorilb"]','img[class="hu5pjgll bixrwtb6"]']
+
+			for emoji_label_index,emoji_label in enumerate(emoji_label_list):
+				try:
+					emoji_stage1= row.select(emoji_label)
+					# print("SELECTING SUCCESS {}".format(emoji_label_index))
+					if emoji_label_index==0:
+						name_pattern=r'>(.*?)<'
+						emoji_name_list=re.findall(name_pattern,str(emoji_stage1))
+						emoji_name = ''.join([str(x) for x in emoji_name_list])
+						# print(emoji_name)
+						emoji_dict['emoji_id'] = emoji_name
+
+					if emoji_label_index == 1:
+						label_response={
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/dOJFaVZihS_.png':'LIKE',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/p_-PTXnrxIv.png':'CARE',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/dhZwLwMz9U7.png':'SAD',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/i6eZvvUMZW5.png':'ANGRY',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/yzxDz4ZUD49.png':'HAHA',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/qZOYbiV8BHS.png':'WOW',
+							'https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/emi3_1IpGVz.png':'LOVE',
+							}
+						type_pattern = r'src="(.*?)"'
+						emoji_type2=re.findall(type_pattern,str(emoji_stage1))[0]
+						emoji_decode=label_response[str(emoji_type2)]
+						# print(emoji_decode)
+						emoji_dict['emoji_type'] = emoji_decode
+				except:
+					print("EMOGI STAGE - {}  FAIL".format(emoji_label_index+1))
+
+			emoji_dict_list.append(emoji_dict)
 
 
+		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
+		close_button.click()
+	except:
+		print("NO EMOJI BUTTOM")
+		pass
 
-def get_emoji_list():
-	pass
+	return emoji_dict_list
 
 
 
@@ -300,21 +358,22 @@ if __name__ == '__main__':
 		driver.find_element_by_id("u_0_2").click()
 
 	time.sleep(2)
-	driver.get("https://www.facebook.com/groups/315124296585941")
+	driver.get("https://www.facebook.com/groups/342191540266126")
 	# https://www.facebook.com/groups/342191540266126
+	# https://www.facebook.com/groups/315124296585941
 	#
 	time.sleep(2)
 	post=5
 	for i in range(post):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
-	click_more_comment(driver=driver)
-	click_more_content(driver=driver)
+	# click_more_comment(driver=driver)
+	# click_more_content(driver=driver)
 	htmltext = driver.page_source
 	#
-	dataset=make_post_dict(html_doc=htmltext)
+	dataset=make_post_dict(html_doc=htmltext,driver=driver)
 
-	with open('result.json', 'w') as fp:
-		json.dump(dataset, fp)
+	# with open('result.json', 'w') as fp:
+	# 	json.dump(dataset, fp)
 
 
