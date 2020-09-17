@@ -260,19 +260,70 @@ def make_post_dict(html_doc,driver):
 
 
 		# -------------------------------------------------------------------GETTING EMOJI-----------------------------------------------------
-		emoji_post_list=[]
 		reaction_list=get_emoji_list(driver=driver, post_index=index_post)
 		post_dict['reaction']=reaction_list
 		dataset.append(post_dict)
-		# print(dataset[index_post]['reaction'])
-		os.system('pause')
+		print(dataset[index_post]['reaction'])
+		# os.system('pause')
 		# print(dataset[index_post])
 		# os.system('pause')
 	# print(dataset)
 	return dataset
-def get_emoji_list(driver, post_index):
-	emoji_dict_list = []
 
+def emoji_data_dealing(emoji_dict_list):
+	emoji_htmltxt = driver.page_source
+	soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
+
+	emoji_window = soup_emoji.select('div[class="l9j0dhe7 tkr6xdv7"]')[0]
+
+	emoji_individual_row = emoji_window.select('div[data-visualcompletion="ignore-dynamic"]')
+	for row in emoji_individual_row:
+		emoji_dict = {'emoji_id': '',
+					  'emoji_type': ''
+					  }
+		# label1 為選取姓名區塊   label2為選取表情符號區塊
+		emoji_label_list = ['div[class="q9uorilb"]', 'img[class="hu5pjgll bixrwtb6"]']
+
+		for emoji_label_index, emoji_label in enumerate(emoji_label_list):
+			try:
+				emoji_stage1 = row.select(emoji_label)
+				# print("SELECTING SUCCESS {}".format(emoji_label_index))
+				if emoji_label_index == 0:
+					name_pattern = r'>(.*?)<'
+					emoji_name_list = re.findall(name_pattern, str(emoji_stage1))
+					emoji_name = ''.join([str(x) for x in emoji_name_list])
+					# print(emoji_name)
+					emoji_dict['emoji_id'] = emoji_name
+
+				if emoji_label_index == 1:
+					label_response = {
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/dOJFaVZihS_.png': 'LIKE',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/p_-PTXnrxIv.png': 'CARE',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/dhZwLwMz9U7.png': 'SAD',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/i6eZvvUMZW5.png': 'ANGRY',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/yzxDz4ZUD49.png': 'HAHA',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/qZOYbiV8BHS.png': 'WOW',
+						'https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/emi3_1IpGVz.png': 'LOVE',
+					}
+					type_pattern = r'src="(.*?)"'
+					emoji_type2 = re.findall(type_pattern, str(emoji_stage1))[0]
+					emoji_decode = label_response[str(emoji_type2)]
+					# print(emoji_decode)
+					emoji_dict['emoji_type'] = emoji_decode
+			except:
+				print("EMOGI STAGE - {}  FAIL".format(emoji_label_index + 1))
+
+		emoji_dict_list.append(emoji_dict)
+	close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
+	close_button.click()
+	return emoji_dict_list
+
+
+
+
+
+def get_emoji_list(driver, post_index):
+	emoji_dict_list=[]
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
@@ -281,65 +332,32 @@ def get_emoji_list(driver, post_index):
 		time.sleep(1)
 		emoji_button.click()
 		time.sleep(1)
-	# l9j0dhe7 tkr6xdv7
-		emoji_htmltxt = driver.page_source
-		soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
-
-		emoji_window=soup_emoji.select('div[class="l9j0dhe7 tkr6xdv7"]')[0]
-
-		emoji_individual_row=emoji_window.select('div[data-visualcompletion="ignore-dynamic"]')
-		for row in emoji_individual_row:
-			emoji_dict = {'emoji_id': '',
-						  'emoji_type': ''
-						  }
-			# label1 為選取姓名區塊   label2為選取表情符號區塊
-			emoji_label_list=['div[class="q9uorilb"]','img[class="hu5pjgll bixrwtb6"]']
-
-			for emoji_label_index,emoji_label in enumerate(emoji_label_list):
-				try:
-					emoji_stage1= row.select(emoji_label)
-					# print("SELECTING SUCCESS {}".format(emoji_label_index))
-					if emoji_label_index==0:
-						name_pattern=r'>(.*?)<'
-						emoji_name_list=re.findall(name_pattern,str(emoji_stage1))
-						emoji_name = ''.join([str(x) for x in emoji_name_list])
-						# print(emoji_name)
-						emoji_dict['emoji_id'] = emoji_name
-
-					if emoji_label_index == 1:
-						label_response={
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/dOJFaVZihS_.png':'LIKE',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/p_-PTXnrxIv.png':'CARE',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/dhZwLwMz9U7.png':'SAD',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/i6eZvvUMZW5.png':'ANGRY',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/yzxDz4ZUD49.png':'HAHA',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/qZOYbiV8BHS.png':'WOW',
-							'https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/emi3_1IpGVz.png':'LOVE',
-							}
-						type_pattern = r'src="(.*?)"'
-						emoji_type2=re.findall(type_pattern,str(emoji_stage1))[0]
-						emoji_decode=label_response[str(emoji_type2)]
-						# print(emoji_decode)
-						emoji_dict['emoji_type'] = emoji_decode
-				except:
-					print("EMOGI STAGE - {}  FAIL".format(emoji_label_index+1))
-
-			emoji_dict_list.append(emoji_dict)
-
-
-		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
-		close_button.click()
 	except:
 		print("NO EMOJI BUTTOM")
 		pass
-
+	else:
+		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
 	return emoji_dict_list
 
 
 
 
+def get_comment_emoji_list(driver,post_index):
+	emoji_dict_list = []
+	post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
+	comment_labellist = ['.//div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
+						 './/div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
+	for label_index,label in enumerate(comment_labellist):
+		comment_segment=post.find_elements_by_xpath(label)[0]
+		try:
+			emoji_button=comment_segment.find_elements_by_xpath(".//div[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l']")[0]
+			emoji_button.click()
 
-
+		except:
+			print("NO EMOJI BUTTON")
+		else:
+			emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
+	return emoji_dict_list
 
 
 
