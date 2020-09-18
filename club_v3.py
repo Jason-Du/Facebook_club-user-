@@ -123,8 +123,7 @@ def make_post_dict(html_doc,driver):
 			if index_label==0:
 				# 主留言
 				allcomment = post.select(label)
-				for comment in allcomment:
-
+				for comment_main_index,comment in enumerate(allcomment):
 					comment_dict = {
 						'comment_id': '',
 						'comment_content': '',
@@ -133,6 +132,7 @@ def make_post_dict(html_doc,driver):
 						'comment_img_num': '',
 						'comment_sticker': '',
 						'comment_below': '',
+						'comment_reation': [],
 					}
 					# comment 為 單個的主流言
 					try:
@@ -188,7 +188,17 @@ def make_post_dict(html_doc,driver):
 					except:
 						print("LINK FAIL")
 						pass
+					comment_main_reaction_list=get_comment_emoji_list(driver=driver,
+																	  post_index=index_post,
+																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
+																	  comment_segment_index=comment_main_index
+																	  )
+					comment_dict['comment_reation']=comment_main_reaction_list
+					print(comment_main_reaction_list)
 					comment_dict_list.append(comment_dict)
+
+				os.system('pause')
+
 			if index_label ==1:
 				# 留言下的留言區塊
 				allcomment_comment = post.select(label)
@@ -206,7 +216,8 @@ def make_post_dict(html_doc,driver):
 											  'comment_link_num':'',
 											  'comment_gif_num':'',
 											  'comment_img_num':'',
-											  'comment_sticker':''
+											  'comment_sticker':'',
+											  'comment_reation':[]
 											  }
 						comment_below_dict['comment_id'] = comment_below_name
 				# 		#留言下的single留言區塊 下的留言區塊
@@ -260,14 +271,15 @@ def make_post_dict(html_doc,driver):
 
 
 		# -------------------------------------------------------------------GETTING EMOJI-----------------------------------------------------
-		reaction_list=get_emoji_list(driver=driver, post_index=index_post)
+		reaction_list=get_post_emoji_list(driver=driver, post_index=index_post)
 		post_dict['reaction']=reaction_list
 		dataset.append(post_dict)
-		print(dataset[index_post]['reaction'])
+		# print(dataset[index_post]['reaction'])
 		# os.system('pause')
 		# print(dataset[index_post])
 		# os.system('pause')
 	# print(dataset)
+	# 	print(dataset[index_post]['comment'])
 	return dataset
 
 def emoji_data_dealing(emoji_dict_list):
@@ -322,7 +334,7 @@ def emoji_data_dealing(emoji_dict_list):
 
 
 
-def get_emoji_list(driver, post_index):
+def get_post_emoji_list(driver, post_index):
 	emoji_dict_list=[]
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
@@ -333,7 +345,7 @@ def get_emoji_list(driver, post_index):
 		emoji_button.click()
 		time.sleep(1)
 	except:
-		print("NO EMOJI BUTTOM")
+		# print("NO EMOJI BUTTOM")
 		pass
 	else:
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
@@ -342,56 +354,75 @@ def get_emoji_list(driver, post_index):
 
 
 
-def get_comment_emoji_list(driver,post_index):
+def get_comment_emoji_list(driver,post_index,comment_segment_path,comment_segment_index):
 	emoji_dict_list = []
-	post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
-	comment_labellist = ['.//div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
-						 './/div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
-	for label_index,label in enumerate(comment_labellist):
-		comment_segment=post.find_elements_by_xpath(label)[0]
-		try:
-			emoji_button=comment_segment.find_elements_by_xpath(".//div[class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l']")[0]
-			emoji_button.click()
-
-		except:
-			print("NO EMOJI BUTTON")
-		else:
-			emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
+	try:
+		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
+		driver.execute_script("arguments[0].scrollIntoView(false);", post)
+		comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
+		print(comment_segment_index)
+		# driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
+		emoji_button=comment_emoji_stage1.find_elements_by_xpath(".//div[@class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l']")[0]
+		# emoji_button_location =comment_emoji_stage1.find_elements_by_xpath('.//div[@class="m9osqain nhd2j8a9 q9uorilb n3ffmt46 l9j0dhe7 gpro0wi8"]')[0]
+		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
+		os.system("pause")
+		time.sleep(1)
+		emoji_button.click()
+		time.sleep(1)
+	except:
+		print("NO EMOJI BUTTON")
+	else:
+		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
 	return emoji_dict_list
-
-
-
-if __name__ == '__main__':
+def set_up(USERNAME,PASSWORD,LINK,scroling_times):
+	pass
 	profile = webdriver.FirefoxProfile()# 新增firefox的設定
 	profile.set_preference("dom.webnotifications.enabled", False)# 將頁面通知關掉
 	profile.update_preferences()# 需要再更新目前firefox新的偏好設定
 	driver = webdriver.Firefox(firefox_profile=profile)
 	driver.get("http://www.facebook.com")
 	time.sleep(2)
-	driver.find_element_by_id("email").send_keys("dushiun@gmail.com") # 將USERNAME改為你的臉書帳號
-	driver.find_element_by_id("pass").send_keys("jason870225") # 將PASSWORD改為你的臉書密碼
+	driver.find_element_by_id("email").send_keys(USERNAME) # 將USERNAME改為你的臉書帳號
+	driver.find_element_by_id("pass").send_keys(PASSWORD) # 將PASSWORD改為你的臉書密碼
 	try:
 		driver.find_element_by_id("u_0_b").click()
 	except:
 		driver.find_element_by_id("u_0_2").click()
 
 	time.sleep(2)
-	driver.get("https://www.facebook.com/groups/342191540266126")
-	# https://www.facebook.com/groups/342191540266126
-	# https://www.facebook.com/groups/315124296585941
-	#
+	driver.get(LINK)
 	time.sleep(2)
-	post=5
-	for i in range(post):
+	for i in range(scroling_times):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
-	# click_more_comment(driver=driver)
+	return driver
+
+
+
+
+if __name__ == '__main__':
+	USERNAME = "dushiun@gmail.com"
+	PASSWORD = "jason870225"
+	LINK='https://www.facebook.com/groups/342191540266126'
+	# https://www.facebook.com/groups/342191540266126
+	# 'https://www.facebook.com/groups/315124296585941'
+	driver=set_up(
+		USERNAME=USERNAME,
+		PASSWORD=PASSWORD,
+		LINK=LINK,
+		scroling_times=5
+
+	)
+
+	click_more_comment(driver=driver)
+
 	# click_more_content(driver=driver)
+
 	htmltext = driver.page_source
 	#
 	dataset=make_post_dict(html_doc=htmltext,driver=driver)
 
-	# with open('result.json', 'w') as fp:
-	# 	json.dump(dataset, fp)
+	with open('result.json', 'w') as fp:
+		json.dump(dataset, fp)
 
 
