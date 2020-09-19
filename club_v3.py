@@ -36,20 +36,28 @@ def click_more_content(driver):
 	print(len(post))
 	for i in post:
 		try:
-			driver.execute_script("arguments[0].scrollIntoView(false);", i)
-			time.sleep(1)
-			more_content = i.find_element_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv'
-												   ' nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 '
-												   'a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p"]')
 			try:
-				driver.execute_script("arguments[0].scrollIntoView(false);", more_content)
+				driver.execute_script("arguments[0].scrollIntoView(false);", i)
 				time.sleep(1)
-				more_content.click()
+				more_content = i.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv'
+													   ' nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 '
+													   'a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p"]')
+				for j in more_content:
+					try:
+						driver.execute_script("arguments[0].scrollIntoView(false);",j)
+						time.sleep(1)
+						j.click()
+					except:
+						print("FAIL CLICK")
+				# driver.execute_script("arguments[0].scrollIntoView(false);", more_content)
+				# time.sleep(1)
+				# more_content.click()
 			except:
 					print("FAIL CLICK")
 		except:
 			print("NO more_content BUTTON")
 			pass
+#
 def make_post_dict(html_doc,driver):
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	dataset = []
@@ -310,7 +318,7 @@ def make_post_dict(html_doc,driver):
 		# print(dataset[index_post]['reaction'])
 		# os.system('pause')
 		print(dataset[index_post])
-		os.system('pause')
+		# os.system('pause')
 	# print(dataset)
 	# 	print(dataset[index_post]['comment'])
 	return dataset
@@ -428,18 +436,6 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
 	return emoji_dict_list
 
-
-
-
-
-
-
-
-
-
-
-
-
 def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	pass
 	profile = webdriver.FirefoxProfile()# 新增firefox的設定
@@ -463,15 +459,28 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 		time.sleep(2)
 	return driver
 
+def save_json_file(dataset):
+	scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+	time_pattern = r'\d{4}-(\d{2})-(\d{2})(\s)(\d{2}):(\d{2}):\d{2}'
 
+	time_list = re.findall(time_pattern, scratch_time)[0]
+
+	finishtime = ''.join([element for element in time_list])
+	replace_pattern = '\s'
+	finishtime = re.sub(r'\s', '_', finishtime)
+	with open(finishtime+'.json', 'w') as fp:
+		json.dump(dataset, fp)
 
 
 if __name__ == '__main__':
+
 	USERNAME = "dushiun@gmail.com"
 	PASSWORD = "jason870225"
-	LINK='https://www.facebook.com/groups/342191540266126'
+
+	LINK='https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
+
 	driver=set_up(
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
@@ -481,13 +490,15 @@ if __name__ == '__main__':
 	)
 	click_more_comment(driver=driver)
 
-	# click_more_content(driver=driver)
+	click_more_comment(driver=driver)
+
+	click_more_content(driver=driver)
 
 	htmltext = driver.page_source
 	#
 	dataset=make_post_dict(html_doc=htmltext,driver=driver)
 
-	# with open('result.json', 'w') as fp:
-	# 	json.dump(dataset, fp)
+	save_json_file(dataset=dataset)
+
 
 
