@@ -194,9 +194,8 @@ def make_post_dict(html_doc,driver):
 																	  comment_segment_index=comment_main_index
 																	  )
 					comment_dict['comment_reation']=comment_main_reaction_list
-					print(comment_main_reaction_list)
 					comment_dict_list.append(comment_dict)
-
+					print(comment_dict_list[comment_main_index])
 				os.system('pause')
 
 			if index_label ==1:
@@ -259,6 +258,8 @@ def make_post_dict(html_doc,driver):
 							print("LINK FAIL 2 STAGE")
 							pass
 						comment_below_dict_list.append(comment_below_dict)
+
+
 					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
 					# 列印出該則PO文底下的所有留言
 
@@ -361,11 +362,11 @@ def get_comment_emoji_list(driver,post_index,comment_segment_path,comment_segmen
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
 		comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
 		# driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
-		emoji_button=comment_emoji_stage1.find_elements_by_xpath(".//div[@class='oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l']")[0]
+		emoji_button=comment_emoji_stage1.find_elements_by_xpath(".//sapn[@class='tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41']")[0]
 		# 																		oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l
+
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 
-		os.system("pause")
 		time.sleep(1)
 		emoji_button.click()
 		time.sleep(1)
@@ -413,7 +414,6 @@ if __name__ == '__main__':
 		scroling_times=5
 
 	)
-
 	click_more_comment(driver=driver)
 
 	# click_more_content(driver=driver)
