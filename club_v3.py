@@ -117,13 +117,18 @@ def make_post_dict(html_doc,driver):
 
 		# ----------------------------------------------------------Comment---------------------------------------------------------------------------
 		# 主留言 與 留言下留言分類區塊
-		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
+		# 主留言 l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
+		#
+		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
 						   'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
 		for index_label,label in enumerate(comment_labellist):
+
 			if index_label==0:
+
 				# 主留言
 				allcomment = post.select(label)
 				for comment_main_index,comment in enumerate(allcomment):
+
 					comment_dict = {
 						'comment_id': '',
 						'comment_content': '',
@@ -132,10 +137,11 @@ def make_post_dict(html_doc,driver):
 						'comment_img_num': '',
 						'comment_sticker': '',
 						'comment_below': '',
-						'comment_reation': [],
+						'comment_reaction': [],
 					}
 					# comment 為 單個的主流言
 					try:
+
 						pass
 						pattern = r'div aria-label="Comment by (.+?) '
 						pattern_content = r'>(.*?)<'
@@ -188,20 +194,23 @@ def make_post_dict(html_doc,driver):
 					except:
 						print("LINK FAIL")
 						pass
+					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
+					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
 					comment_main_reaction_list=get_comment_emoji_list(driver=driver,
 																	  post_index=index_post,
-																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80"]',
+																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
 																	  comment_segment_index=comment_main_index
 																	  )
-					comment_dict['comment_reation']=comment_main_reaction_list
+					comment_dict['comment_reaction']=comment_main_reaction_list
 					comment_dict_list.append(comment_dict)
-					print(comment_dict_list[comment_main_index])
-				os.system('pause')
+					# print(comment_dict_list[comment_main_index])
 
-			if index_label ==1:
+			if index_label==1:
+
 				# 留言下的留言區塊
 				allcomment_comment = post.select(label)
 				for index_dict,comment_below in enumerate(allcomment_comment):
+
 					comment_below_dict_list = []
 					pattern = r'Reply by (.+?) '
 					comment_below_name_list=re.findall(pattern,str(comment_below))
@@ -216,11 +225,12 @@ def make_post_dict(html_doc,driver):
 											  'comment_gif_num':'',
 											  'comment_img_num':'',
 											  'comment_sticker':'',
-											  'comment_reation':[]
+											  'comment_reaction':[]
 											  }
 						comment_below_dict['comment_id'] = comment_below_name
 				# 		#留言下的single留言區塊 下的留言區塊
-						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80"]')[index_below]
+				# 		l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80
+						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]')[index_below]
 						try:
 							comment_below3=comment_below2.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
 							pattern_below_content = r'>(.*?)<'
@@ -257,10 +267,19 @@ def make_post_dict(html_doc,driver):
 						except:
 							print("LINK FAIL 2 STAGE")
 							pass
+
+
 						comment_below_dict_list.append(comment_below_dict)
 
-
 					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
+					# emoji_below_list = get_comment_emoji_list(driver=driver,
+					# 										  post_index=index_post,
+					# 										  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
+					# 										  comment_segment_index=index_dict)
+					# comment_dict_list[index_dict]['comment_reaction'] = emoji_below_list
+
+					print(comment_dict_list[index_dict])
+				print('*************************************')
 					# 列印出該則PO文底下的所有留言
 
 					# print(comment_dict_list[index_dict])
@@ -358,18 +377,28 @@ def get_post_emoji_list(driver, post_index):
 def get_comment_emoji_list(driver,post_index,comment_segment_path,comment_segment_index):
 	emoji_dict_list = []
 	try:
+
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
 		comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
-		# driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
-		emoji_button=comment_emoji_stage1.find_elements_by_xpath(".//sapn[@class='tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41']")[0]
+		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
+		#
+		try:
+			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq _680_']")[0]
+
+		except:
+			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq']")[0]
+
+		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage2)
+		time.sleep(1)
+		emoji_button=comment_emoji_stage2.find_elements_by_xpath(".//span[@class='tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41']")[0]
 		# 																		oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l
-
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
-
+		# print('emojitest2')
 		time.sleep(1)
 		emoji_button.click()
 		time.sleep(1)
+
 	except:
 		print("NO EMOJI BUTTON")
 	else:
@@ -422,7 +451,7 @@ if __name__ == '__main__':
 	#
 	dataset=make_post_dict(html_doc=htmltext,driver=driver)
 
-	with open('result.json', 'w') as fp:
-		json.dump(dataset, fp)
+	# with open('result.json', 'w') as fp:
+	# 	json.dump(dataset, fp)
 
 
