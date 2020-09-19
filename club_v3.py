@@ -197,13 +197,18 @@ def make_post_dict(html_doc,driver):
 					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
 					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
 					comment_main_reaction_list=get_comment_emoji_list(driver=driver,
+																	  mode=1,
 																	  post_index=index_post,
 																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
-																	  comment_segment_index=comment_main_index
+																	  comment_segment_index=comment_main_index,
+																	  comment_below_segment_path='',
+																	  comment_below_segment_index=''
 																	  )
 					comment_dict['comment_reaction']=comment_main_reaction_list
 					comment_dict_list.append(comment_dict)
+					# 列印出主留言
 					# print(comment_dict_list[comment_main_index])
+					# print('--------------------------------------------------------')
 
 			if index_label==1:
 
@@ -267,20 +272,28 @@ def make_post_dict(html_doc,driver):
 						except:
 							print("LINK FAIL 2 STAGE")
 							pass
+						comment_below_reaction_list = get_comment_emoji_list(driver=driver,
+																			mode=2,
+																			post_index=index_post,
+																			comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
+																			comment_segment_index=index_below,
+																			comment_below_segment_path='.//div[@class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]',
+																			comment_below_segment_index=index_dict
+																			)
+																													# 'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]'
 
 
+						comment_below_dict['comment_reaction']=comment_below_reaction_list
 						comment_below_dict_list.append(comment_below_dict)
 
-					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
-					# emoji_below_list = get_comment_emoji_list(driver=driver,
-					# 										  post_index=index_post,
-					# 										  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
-					# 										  comment_segment_index=index_dict)
-					# comment_dict_list[index_dict]['comment_reaction'] = emoji_below_list
 
-					print(comment_dict_list[index_dict])
-				print('*************************************')
-					# 列印出該則PO文底下的所有留言
+
+					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
+					# # 列印出該則PO文底下的所有留言
+					# print(comment_dict_list[index_dict])
+
+				# print('*************************************')
+
 
 					# print(comment_dict_list[index_dict])
 
@@ -296,8 +309,8 @@ def make_post_dict(html_doc,driver):
 		dataset.append(post_dict)
 		# print(dataset[index_post]['reaction'])
 		# os.system('pause')
-		# print(dataset[index_post])
-		# os.system('pause')
+		print(dataset[index_post])
+		os.system('pause')
 	# print(dataset)
 	# 	print(dataset[index_post]['comment'])
 	return dataset
@@ -346,6 +359,7 @@ def emoji_data_dealing(emoji_dict_list):
 				print("EMOGI STAGE - {}  FAIL".format(emoji_label_index + 1))
 
 		emoji_dict_list.append(emoji_dict)
+
 	close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 	close_button.click()
 	return emoji_dict_list
@@ -374,13 +388,22 @@ def get_post_emoji_list(driver, post_index):
 
 
 
-def get_comment_emoji_list(driver,post_index,comment_segment_path,comment_segment_index):
+def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,comment_below_segment_index,comment_segment_path,comment_segment_index):
 	emoji_dict_list = []
 	try:
-
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
-		comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
+		if mode==1:
+			# 主留言
+			comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
+		else:
+			# 留言下的留言區塊分區
+			comment_segment0=post.find_elements_by_xpath(comment_below_segment_path)[comment_below_segment_index]
+
+			driver.execute_script("arguments[0].scrollIntoView(false);", comment_segment0)
+			# 留言下的留言INDEX
+			comment_emoji_stage1=comment_segment0.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
+
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
 		#
 		try:
@@ -404,6 +427,19 @@ def get_comment_emoji_list(driver,post_index,comment_segment_path,comment_segmen
 	else:
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
 	return emoji_dict_list
+
+
+
+
+
+
+
+
+
+
+
+
+
 def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	pass
 	profile = webdriver.FirefoxProfile()# 新增firefox的設定
