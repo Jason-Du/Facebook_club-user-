@@ -466,6 +466,7 @@ def save_json_file(dataset):
 	finishtime = ''.join([element for element in time_list])
 
 	finishtime = re.sub(r'\s', '_', finishtime)
+	print(finishtime)
 	with open(finishtime+'.json', 'w') as fp:
 		json.dump(dataset, fp)
 
@@ -483,7 +484,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=5
+		scroling_times=6
 
 	)
 	click_more_comment(driver=driver)
@@ -493,7 +494,7 @@ if __name__ == '__main__':
 	click_more_content(driver=driver)
 
 	htmltext = driver.page_source
-	#
+
 	dataset=make_post_dict(html_doc=htmltext,driver=driver)
 
 	save_json_file(dataset=dataset)
