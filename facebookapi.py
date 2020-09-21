@@ -13,7 +13,7 @@ def get_json_from_cloud():
 def get_user_id(dataset):
 	'''
 
-	:param dataset:
+	:param dataset:dataset file from get_json_from_cloud
 	:return: List for Facebook Club user id
 	'''
 	return dataset['member_info']
@@ -23,8 +23,8 @@ def show_all_post(dataset):
 	"""
 	Show the content of all post
 
-	:param dataset:
-	:return:NONE
+	:param dataset:dataset file from get_json_from_cloud
+
 	"""
 	for index, comment in enumerate(dataset['post_info']):
 		print('post id:{}'.format(index))
@@ -43,6 +43,12 @@ def get_post_by_post_id(dataset, post_id):
 
 
 def show_all_comments_by_post_id(dataset, post_id):
+	'''
+
+	:param dataset: dataset file from get_json_from_cloud
+	:param post_id:
+	:return: NONE
+	'''
 	for index, comment in enumerate(dataset['post_info'][post_id]['comment']):
 		print('post id :{} comment id:{}'.format(post_id, index))
 		print(comment)
@@ -76,8 +82,8 @@ def get_comment_below_by_post_id_comment_id_comment_below_id(dataset, post_id, c
 
 if __name__ == '__main__':
 	pass
-	dataset = get_json_from_cloud()
-	print(get_user_id(dataset=dataset))
+	# dataset = get_json_from_cloud()
+	# print(get_user_id(dataset=dataset))
 
 
 	# show_all_post(dataset)

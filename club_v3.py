@@ -324,11 +324,13 @@ def make_post_dict(html_doc,driver):
 	return dataset
 
 def emoji_data_dealing(emoji_dict_list,driver):
+	# 點開EMOJI視窗後使用beautifulsoup 解析
 	emoji_htmltxt = driver.page_source
 	soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
 
 	emoji_window = soup_emoji.select('div[class="l9j0dhe7 tkr6xdv7"]')[0]
 
+	# 單一EMOJI USER 區塊
 	emoji_individual_row = emoji_window.select('div[data-visualcompletion="ignore-dynamic"]')
 	for row in emoji_individual_row:
 		emoji_dict = {'emoji_id': '',
@@ -418,7 +420,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
 		time.sleep(1)
-		#
+		# 預防出現連結 造成emoji class 位置不同
 		try:
 			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq _680_']")[0]
 
@@ -427,8 +429,9 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage2)
 		time.sleep(1)
+		# emoji button 位置
 		emoji_button=comment_emoji_stage2.find_elements_by_xpath(".//span[@class='tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41']")[0]
-		# 																		oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l
+		# 																		=
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 		# print('emojitest2')
 		time.sleep(1)
@@ -475,6 +478,7 @@ def save_json_file(dataset):
 		json.dump(dataset, fp)
 
 def get_club_member_list(LINK,driver):
+	# 抓取社團名單
 	time.sleep(2)
 	driver.get(LINK+'/members')
 	time.sleep(2)
