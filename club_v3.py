@@ -323,7 +323,7 @@ def make_post_dict(html_doc,driver):
 	# 	print(dataset[index_post]['comment'])
 	return dataset
 
-def emoji_data_dealing(emoji_dict_list):
+def emoji_data_dealing(emoji_dict_list,driver):
 	emoji_htmltxt = driver.page_source
 	soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
 
@@ -390,7 +390,7 @@ def get_post_emoji_list(driver, post_index):
 		# print("NO EMOJI BUTTOM")
 		pass
 	else:
-		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
+		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
 
 
@@ -433,7 +433,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 	except:
 		print("NO EMOJI BUTTON")
 	else:
-		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list)
+		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
 
 def set_up(USERNAME,PASSWORD,LINK,scroling_times):

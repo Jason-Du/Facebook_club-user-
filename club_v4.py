@@ -15,7 +15,7 @@ if __name__ == '__main__':
         USERNAME=USERNAME,
         PASSWORD=PASSWORD,
         LINK=LINK,
-        scroling_times=6
+        scroling_times=7
 
     )
     cl.click_more_comment(driver=driver)
