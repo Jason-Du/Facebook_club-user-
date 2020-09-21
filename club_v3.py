@@ -370,6 +370,7 @@ def emoji_data_dealing(emoji_dict_list,driver):
 
 	close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 	close_button.click()
+	time.sleep(1)
 	return emoji_dict_list
 
 
@@ -381,6 +382,7 @@ def get_post_emoji_list(driver, post_index):
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
+		time.sleep(1)
 		emoji_button=post.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 a8c37x1j p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l gmql0nx0 ce9h75a5 ni8dbmo4 stjgntxs"]')[0]
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 		time.sleep(1)
@@ -401,6 +403,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
+		time.sleep(1)
 		if mode==1:
 			# 主留言
 			comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
@@ -409,10 +412,12 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 			comment_segment0=post.find_elements_by_xpath(comment_below_segment_path)[comment_below_segment_index]
 
 			driver.execute_script("arguments[0].scrollIntoView(false);", comment_segment0)
+			time.sleep(1)
 			# 留言下的留言INDEX
 			comment_emoji_stage1=comment_segment0.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
 
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
+		time.sleep(1)
 		#
 		try:
 			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq _680_']")[0]
@@ -450,7 +455,6 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 		driver.find_element_by_id("u_0_b").click()
 	except:
 		driver.find_element_by_id("u_0_2").click()
-
 	time.sleep(2)
 	driver.get(LINK)
 	time.sleep(2)
@@ -470,35 +474,73 @@ def save_json_file(dataset):
 	with open('dataset.json', 'w') as fp:
 		json.dump(dataset, fp)
 
+def get_club_member_list(LINK,driver):
+	time.sleep(2)
+	driver.get(LINK+'/members')
+	time.sleep(2)
+	for i in range(5):
+		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+		time.sleep(2)
+	html_doc = driver.page_source
+	memberlist=[]
+	soup = BeautifulSoup(html_doc, 'html.parser')
+	body = soup.find('body')
+	member_list_section = body.select('div[class="muag1w35 b20td4e0"]')[4]
+	member_row=member_list_section.select('div[data-visualcompletion="ignore-dynamic"]')
+	for single_member_row in member_row:
+		member_name=single_member_row.select('a[class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 '
+								 'nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso '
+								 'i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p"]')
+		pattern=r'>(.*?)<'
+		member_name=re.findall(pattern,str(member_name))[0]
+		memberlist.append(member_name)
+	return memberlist
+	pass
+
+def make_dataset(post_info,member_info):
+	dataset={'post_info':[],
+			 'member_info':[]
+
+	}
+	dataset['post_info']=post_info
+	dataset['member_info']=member_info
+	return dataset
+
 
 if __name__ == '__main__':
 
 	USERNAME = "dushiun@gmail.com"
 	PASSWORD = "jason870225"
 
+
 	LINK='https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
+	# https://www.facebook.com/groups/315124296585941/members
 
 	driver=set_up(
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=6
+		scroling_times=7
 
 	)
 
-	click_more_comment(driver=driver)
 
-	click_more_comment(driver=driver)
+	# click_more_comment(driver=driver)
+	#
+	# click_more_comment(driver=driver)
+	#
+	# click_more_content(driver=driver)
+	#
+	# htmltext = driver.page_source
+	#
+	# post_info=make_post_dict(html_doc=htmltext,driver=driver)
 
-	click_more_content(driver=driver)
+	# memberlist=get_club_member_list(LINK,driver=driver)
 
-	htmltext = driver.page_source
 
-	dataset=make_post_dict(html_doc=htmltext,driver=driver)
-
-	save_json_file(dataset=dataset)
+	# save_json_file(dataset=dataset)
 
 
 
