@@ -467,7 +467,7 @@ def save_json_file(dataset):
 
 	finishtime = re.sub(r'\s', '_', finishtime)
 	print(finishtime)
-	with open(finishtime+'.json', 'w') as fp:
+	with open('dataset.json', 'w') as fp:
 		json.dump(dataset, fp)
 
 
@@ -487,6 +487,7 @@ if __name__ == '__main__':
 		scroling_times=6
 
 	)
+
 	click_more_comment(driver=driver)
 
 	click_more_comment(driver=driver)
