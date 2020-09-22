@@ -23,8 +23,9 @@ def click_more_comment(driver):
 						driver.execute_script("arguments[0].scrollIntoView(false);",j)
 						time.sleep(1)
 						j.click()
+						time.sleep(2)
 					except:
-						print("FAIL CLICK")
+						print("FAIL CLICK more_comment")
 			except:
 				print("FAIL FIND LOCATION")
 		except:
@@ -47,13 +48,14 @@ def click_more_content(driver):
 						driver.execute_script("arguments[0].scrollIntoView(false);",j)
 						time.sleep(1)
 						j.click()
+						time.sleep(2)
 					except:
-						print("FAIL CLICK")
+						print("FAIL CLICK more_content 2 stage")
 				# driver.execute_script("arguments[0].scrollIntoView(false);", more_content)
 				# time.sleep(1)
 				# more_content.click()
 			except:
-					print("FAIL CLICK")
+					print("FAIL CLICK more_content 1 stage")
 		except:
 			print("NO more_content BUTTON")
 			pass
@@ -389,7 +391,7 @@ def get_post_emoji_list(driver, post_index):
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 		time.sleep(1)
 		emoji_button.click()
-		time.sleep(1)
+		time.sleep(2)
 	except:
 		# print("NO EMOJI BUTTOM")
 		pass
@@ -436,7 +438,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		# print('emojitest2')
 		time.sleep(1)
 		emoji_button.click()
-		time.sleep(1)
+		time.sleep(2)
 
 	except:
 		print("NO EMOJI BUTTON")
@@ -460,7 +462,7 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 		driver.find_element_by_id("u_0_2").click()
 	time.sleep(2)
 	driver.get(LINK)
-	time.sleep(2)
+	time.sleep(3)
 	for i in range(scroling_times):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
@@ -526,7 +528,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=7
+		scroling_times=8
 
 	)
 

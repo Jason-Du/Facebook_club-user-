@@ -2,7 +2,8 @@ import gdown
 import json
 
 def get_json_from_cloud():
-	url = "https://drive.google.com/uc?export=download&id=1olhqS6vQY_-Poe4JOf_i_lVyJZE6Ggf4"
+	url = "https://drive.google.com/uc?export=download&id=1mVOWonMj-HIH0P6Qh3FwYeG8Pd8cd7uP"
+	#
 	output = "dataset_test.json"
 	gdown.download(url, output)
 
@@ -82,11 +83,11 @@ def get_comment_below_by_post_id_comment_id_comment_below_id(dataset, post_id, c
 
 if __name__ == '__main__':
 	pass
-	# dataset = get_json_from_cloud()
+	dataset = get_json_from_cloud()
 	# print(get_user_id(dataset=dataset))
 
 
-	# show_all_post(dataset)
+	show_all_post(dataset)
 	#
 	#
 	# print('------------')
