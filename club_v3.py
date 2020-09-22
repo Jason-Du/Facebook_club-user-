@@ -8,7 +8,10 @@ import json
 
 def click_more_comment(driver):
 	pass
+
 	post=driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")
+	print("CLICK MORE COMMENT ON GOING")
+	print("POST NUMBER:{}".format(len(post)))
 	for i in post:
 		try:
 			try:
@@ -34,7 +37,8 @@ def click_more_comment(driver):
 
 def click_more_content(driver):
 	post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")
-	print(len(post))
+	print("CLICK MORE CONTENT ON GOING")
+	print("POST NUMBER:{}".format(len(post)))
 	for i in post:
 		try:
 			try:
@@ -374,7 +378,7 @@ def emoji_data_dealing(emoji_dict_list,driver):
 
 	close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 	close_button.click()
-	time.sleep(1)
+	time.sleep(2)
 	return emoji_dict_list
 
 
@@ -531,8 +535,6 @@ if __name__ == '__main__':
 		scroling_times=8
 
 	)
-
-
 	# click_more_comment(driver=driver)
 	#
 	# click_more_comment(driver=driver)
