@@ -8,31 +8,30 @@ import json
 
 def click_more_comment(driver):
 	pass
-
 	post=driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")
 	print("CLICK MORE COMMENT ON GOING")
 	print("POST NUMBER:{}".format(len(post)))
 	for i in post:
 		try:
-			try:
-				driver.execute_script("arguments[0].scrollIntoView(false);", i)
-				time.sleep(1)
-				more_comment=i.find_elements_by_xpath('.//div[@class="oajrlxb2 bp9cbjyn g5ia77u1 mtkw9kbi tlpljxtp qensuy8j ppp5ayq2 goun2846 ccm00jje s44p3ltw mk2mc5f4 rt8b4zig n8ej3o3l agehan2d sk4xxmp2 '
-													  'rq0escxv nhd2j8a9 pq6dq46d mg4g778l btwxx1t3 g5gj957u p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x tgvbjcpo hpfvmrgz jb3vyjys p8fzw8mz qt6c0cv9 a8nywdso '
-													  'l9j0dhe7 i1ao9s8h esuyzwwr f1sip0of du4w35lb lzcic4wl abiwlrkh gpro0wi8 m9osqain buofh1pr"]'
-													  )
-				for j in more_comment:
-					try:
-						driver.execute_script("arguments[0].scrollIntoView(false);",j)
-						time.sleep(1)
-						j.click()
-						time.sleep(2)
-					except:
-						print("FAIL CLICK more_comment")
-			except:
-				print("FAIL FIND LOCATION")
+			driver.execute_script("arguments[0].scrollIntoView(false);", i)
+			time.sleep(2)
+			more_comment=i.find_elements_by_xpath('.//div[@class="oajrlxb2 bp9cbjyn g5ia77u1 mtkw9kbi tlpljxtp qensuy8j ppp5ayq2 goun2846 ccm00jje s44p3ltw mk2mc5f4 rt8b4zig n8ej3o3l agehan2d sk4xxmp2 '
+												  'rq0escxv nhd2j8a9 pq6dq46d mg4g778l btwxx1t3 g5gj957u p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x tgvbjcpo hpfvmrgz jb3vyjys p8fzw8mz qt6c0cv9 a8nywdso '
+												  'l9j0dhe7 i1ao9s8h esuyzwwr f1sip0of du4w35lb lzcic4wl abiwlrkh gpro0wi8 m9osqain buofh1pr"]'
+												  )
+			for j in more_comment:
+				try:
+					driver.execute_script("arguments[0].scrollIntoView(false);",j)
+					time.sleep(2)
+					j.click()
+					time.sleep(2)
+				except:
+					print("FAIL CLICK more_comment")
 		except:
+			print("NO more_comment BUTTON")
 			pass
+			# print("FAIL FIND LOCATION")
+
 
 
 def click_more_content(driver):
@@ -41,26 +40,21 @@ def click_more_content(driver):
 	print("POST NUMBER:{}".format(len(post)))
 	for i in post:
 		try:
-			try:
-				driver.execute_script("arguments[0].scrollIntoView(false);", i)
-				time.sleep(1)
-				more_content = i.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv'
-													   ' nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 '
-													   'a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p"]')
-				for j in more_content:
-					try:
-						driver.execute_script("arguments[0].scrollIntoView(false);",j)
-						time.sleep(1)
-						j.click()
-						time.sleep(2)
-					except:
-						print("FAIL CLICK more_content 2 stage")
-				# driver.execute_script("arguments[0].scrollIntoView(false);", more_content)
-				# time.sleep(1)
-				# more_content.click()
-			except:
-					print("FAIL CLICK more_content 1 stage")
+			driver.execute_script("arguments[0].scrollIntoView(false);", i)
+			time.sleep(2)
+			more_content = i.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv'
+												   ' nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 '
+												   'a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p"]')
+			for j in more_content:
+				try:
+					driver.execute_script("arguments[0].scrollIntoView(false);",j)
+					time.sleep(2)
+					j.click()
+					time.sleep(2)
+				except:
+					print("FAIL CLICK more_content BUTTON")
 		except:
+
 			print("NO more_content BUTTON")
 			pass
 #
@@ -390,14 +384,17 @@ def get_post_emoji_list(driver, post_index):
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
-		time.sleep(1)
+		time.sleep(2)
 		emoji_button=post.find_elements_by_xpath('.//div[@class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 a8c37x1j p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l gmql0nx0 ce9h75a5 ni8dbmo4 stjgntxs"]')[0]
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
-		time.sleep(1)
-		emoji_button.click()
-		time.sleep(2)
+		try:
+			time.sleep(2)
+			emoji_button.click()
+			time.sleep(2)
+		except:
+			print("FAIL CLICK POST EMOJI BUTTON")
 	except:
-		# print("NO EMOJI BUTTOM")
+		# print("NO POST EMOJI BUTTOM")
 		pass
 	else:
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
@@ -411,7 +408,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 	try:
 		post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")[post_index]
 		driver.execute_script("arguments[0].scrollIntoView(false);", post)
-		time.sleep(1)
+		time.sleep(2)
 		if mode==1:
 			# 主留言
 			comment_emoji_stage1 = post.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
@@ -420,12 +417,12 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 			comment_segment0=post.find_elements_by_xpath(comment_below_segment_path)[comment_below_segment_index]
 
 			driver.execute_script("arguments[0].scrollIntoView(false);", comment_segment0)
-			time.sleep(1)
+			time.sleep(2)
 			# 留言下的留言INDEX
 			comment_emoji_stage1=comment_segment0.find_elements_by_xpath(comment_segment_path)[comment_segment_index]
 
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage1)
-		time.sleep(1)
+		time.sleep(2)
 		# 預防出現連結 造成emoji class 位置不同
 		try:
 			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq _680_']")[0]
@@ -434,18 +431,21 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 			comment_emoji_stage2 = comment_emoji_stage1.find_elements_by_xpath(".//div[@class='_6cuq']")[0]
 
 		driver.execute_script("arguments[0].scrollIntoView(false);", comment_emoji_stage2)
-		time.sleep(1)
+		time.sleep(2)
 		# emoji button 位置
 		emoji_button=comment_emoji_stage2.find_elements_by_xpath(".//span[@class='tojvnm2t a6sixzi8 abs2jz4q a8s20v7p t1p8iaqh k5wvi7nf q3lfd5jv pk4s997a bipmatt0 cebpdrjk qowsmv63 owwhemhu dp1hu0rb dhp61c6y iyyx5f41']")[0]
 		# 																		=
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 		# print('emojitest2')
-		time.sleep(1)
-		emoji_button.click()
-		time.sleep(2)
-
+		try:
+			time.sleep(2)
+			emoji_button.click()
+			time.sleep(2)
+		except:
+			print("FAIL CLICK COMMENT EMOJI BUTTON")
 	except:
-		print("NO EMOJI BUTTON")
+		# print("NO COMMENT EMOJI BUTTON")
+		pass
 	else:
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
@@ -463,7 +463,7 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	try:
 		driver.find_element_by_id("u_0_b").click()
 	except:
-		driver.find_element_by_id("u_0_2").click()
+		driver.find_element_by_id("u_0_4").click()
 	time.sleep(2)
 	driver.get(LINK)
 	time.sleep(3)

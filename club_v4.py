@@ -16,8 +16,6 @@ if __name__ == '__main__':
 		scroling_times=7
 	)
 
-
-
 	cl.click_more_comment(driver=driver)
 
 	cl.click_more_comment(driver=driver)
