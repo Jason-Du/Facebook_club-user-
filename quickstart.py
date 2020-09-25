@@ -10,7 +10,6 @@ from oauth2client import file, client, tools
 # 權限必須
 SCOPES = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
-
 def delete_drive_service_file(service, file_id):
     service.files().delete(fileId=file_id).execute()
 
@@ -104,7 +103,6 @@ def main(is_update_file_function=False, update_drive_service_name=None, update_f
     :param update_drive_service_name: 要上傳到雲端上的檔案名稱
     :param update_file_path: 要上傳檔案的位置以及名稱
     """
-
     print("is_update_file_function")
     print(type(is_update_file_function))
     print(is_update_file_function)
@@ -131,10 +129,9 @@ def main(is_update_file_function=False, update_drive_service_name=None, update_f
                     local_file_path=os.getcwd() + '/' + update_drive_service_name)
         print("=====上傳檔案完成=====")
 
-
 if __name__ == '__main__':
 
-    main(is_update_file_function=bool(True), update_drive_service_name='dataset.json', update_file_path=os.getcwd() + '/')
+    main(is_update_file_function=bool(True), update_drive_service_name='aaa.txt', update_file_path=os.getcwd() + '/')
 
 
 
