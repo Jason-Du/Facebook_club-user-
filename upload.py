@@ -38,8 +38,8 @@ def update_file(service, update_drive_service_name, local_file_path):
     print('檔案大小為: ' + str(file_metadata_size) + ' byte')
     print("上傳時間為: " + str(end-start))
 
-    return file_metadata['name'], file_id['id']
 
+    return file_metadata['name'], file_id['id']
 
 
 def search_file(service, update_drive_service_name, is_delete_search_file=False):
