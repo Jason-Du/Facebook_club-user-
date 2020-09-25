@@ -481,7 +481,7 @@ def save_json_file(dataset):
 	finishtime = re.sub(r'\s', '_', finishtime)
 	print(finishtime)
 	with open('dataset.json', 'w') as fp:
-		json.dump(dataset, fp)
+		json.dump(dataset, fp,indent=4)
 
 def get_club_member_list(LINK,driver):
 	# 抓取社團名單
