@@ -1,12 +1,9 @@
-import gdown
 import json
+import download as d
+import os
 
 def get_json_from_cloud():
-	url = "https://drive.google.com/uc?export=download&id=1mVOWonMj-HIH0P6Qh3FwYeG8Pd8cd7uP"
-	#
-	output = "dataset_test.json"
-	gdown.download(url, output)
-
+	d.dowmload(is_download_file_function=bool(True), download_drive_service_name='aaa.txt', download_file_path=os.getcwd() + '/')
 	with open('dataset_test.json', 'r', encoding='utf-8') as f:
 		dataset = json.load(f)
 	return dataset
