@@ -74,7 +74,7 @@ def search_file(service, download_drive_service_name, is_delete_search_file=Fals
                 times += 1
 
 
-def dowmload(is_download_file_function=False,
+def main(is_download_file_function=False,
          download_drive_service_name=None,
          download_file_path=None):
     """
@@ -103,7 +103,7 @@ def dowmload(is_download_file_function=False,
 
 if __name__ == '__main__':
 
-    dowmload(is_download_file_function=bool(True), download_drive_service_name='aaa.txt', download_file_path=os.getcwd() + '/')
+    main(is_download_file_function=bool(True), download_drive_service_name='aaa.txt', download_file_path=os.getcwd() + '/')
 
 
 
