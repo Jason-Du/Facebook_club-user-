@@ -1,5 +1,5 @@
 import club_v3 as cl
-import quickstart
+import upload
 import os
 
 if __name__ == '__main__':
@@ -32,4 +32,4 @@ if __name__ == '__main__':
 
 	cl.save_json_file(dataset=dataset)
 
-	quickstart.main(is_update_file_function=bool(True), update_drive_service_name='dataset.json',update_file_path=os.getcwd() + '/')
+	upload.main(is_update_file_function=bool(True), update_drive_service_name='dataset.json',update_file_path=os.getcwd() + '/')
