@@ -3,7 +3,7 @@ import download as d
 import os
 
 def get_json_from_cloud():
-	d.dowmload(is_download_file_function=bool(True), download_drive_service_name='dataset.json', download_file_path=os.getcwd() + '/')
+	d.main(is_download_file_function=bool(True), download_drive_service_name='dataset.json', download_file_path=os.getcwd() + '/')
 	with open('dataset.json', 'r', encoding='utf-8') as f:
 		dataset = json.load(f)
 	return dataset
