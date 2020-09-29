@@ -476,11 +476,9 @@ def save_json_file(dataset):
 	scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 	time_pattern = r'\d{4}-(\d{2})-(\d{2})(\s)(\d{2}):(\d{2}):\d{2}'
 	time_list = re.findall(time_pattern, scratch_time)[0]
-	finishtime = ''.join([element for element in time_list])
-
-	finishtime = re.sub(r'\s', '_', finishtime)
+	finishtime = str(time_list[0] + time_list[1])
 	print(finishtime)
-	with open('dataset.json', 'w') as fp:
+	with open(finishtime+'.json', 'w') as fp:
 		json.dump(dataset, fp,indent=4)
 
 def get_club_member_list(LINK,driver):
