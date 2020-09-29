@@ -1,6 +1,8 @@
 import club_v3 as cl
 import upload
 import os
+import re
+import  time
 
 if __name__ == '__main__':
 	USERNAME = "dushiun@gmail.com"
@@ -13,7 +15,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=7
+		scroling_times=8
 	)
 
 	cl.click_more_comment(driver=driver)
@@ -31,5 +33,9 @@ if __name__ == '__main__':
 	dataset=cl.make_dataset(post_info=postlist,member_info=memberlist)
 
 	cl.save_json_file(dataset=dataset)
+	scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+	time_pattern = r'\d{4}-(\d{2})-(\d{2})(\s)(\d{2}):(\d{2}):\d{2}'
+	time_list = re.findall(time_pattern, scratch_time)[0]
+	finishtime = str(time_list[0] + time_list[1])
 
-	upload.main(is_update_file_function=bool(True), update_drive_service_name='dataset.json',update_file_path=os.getcwd() + '/')
+	upload.main(is_update_file_function=bool(True), update_drive_service_name=finishtime+'.json',update_file_path=os.getcwd() + '/')
