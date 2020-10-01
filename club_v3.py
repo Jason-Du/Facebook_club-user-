@@ -486,7 +486,7 @@ def get_club_member_list(LINK,driver):
 	time.sleep(2)
 	driver.get(LINK+'/members')
 	time.sleep(2)
-	for i in range(5):
+	for i in range(8):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
 	html_doc = driver.page_source
