@@ -489,6 +489,7 @@ def get_club_member_list(LINK,driver):
 	for i in range(8):
 		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 		time.sleep(2)
+
 	html_doc = driver.page_source
 	memberlist=[]
 	soup = BeautifulSoup(html_doc, 'html.parser')
