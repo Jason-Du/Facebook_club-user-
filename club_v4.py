@@ -23,6 +23,8 @@ if __name__ == '__main__':
 
 	cl.click_more_comment(driver=driver)
 
+	cl.click_more_comment(driver=driver)
+
 	cl.click_more_content(driver=driver)
 
 	htmltext = driver.page_source
