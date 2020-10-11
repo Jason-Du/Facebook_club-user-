@@ -494,7 +494,8 @@ def get_club_member_list(LINK,driver):
 	memberlist=[]
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	body = soup.find('body')
-	member_list_section = body.select('div[class="muag1w35 b20td4e0"]')[4]
+	# 選取member區段
+	member_list_section = body.select('div[class="b20td4e0 muag1w35"]')[4]
 	member_row=member_list_section.select('div[data-visualcompletion="ignore-dynamic"]')
 	for single_member_row in member_row:
 		member_name=single_member_row.select('a[class="oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 '
@@ -545,6 +546,7 @@ if __name__ == '__main__':
 	# post_info=make_post_dict(html_doc=htmltext,driver=driver)
 
 	# memberlist=get_club_member_list(LINK,driver=driver)
+
 
 
 	# save_json_file(dataset=dataset)
