@@ -506,14 +506,38 @@ def get_club_member_list(LINK,driver):
 		memberlist.append(member_name)
 	return memberlist
 	pass
+def get_club_announcement_list(LINK,driver):
+	# 抓取社團名單
+	time.sleep(2)
+	driver.get(LINK+'/announcements')
+	time.sleep(2)
+	for i in range(5):
+		driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+		time.sleep(2)
 
-def make_dataset(post_info,member_info):
+	html_doc = driver.page_source
+	announcement_list=[]
+	click_more_comment(driver=driver)
+
+	click_more_comment(driver=driver)
+
+	click_more_content(driver=driver)
+
+	htmltext = driver.page_source
+
+	post_info=make_post_dict(html_doc=htmltext,driver=driver)
+
+	return post_info
+	pass
+def make_dataset(post_info,member_info,announcement_info):
 	dataset={'post_info':[],
-			 'member_info':[]
+			 'member_info':[],
+			 'announcement_info':[]
 
 	}
 	dataset['post_info']=post_info
 	dataset['member_info']=member_info
+	dataset['announcement_info']=announcement_info
 	return dataset
 
 
@@ -532,22 +556,27 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=8
+		scroling_times=2
 
 	)
-	# click_more_comment(driver=driver)
+	click_more_comment(driver=driver)
 	#
 	# click_more_comment(driver=driver)
 	#
 	# click_more_content(driver=driver)
 	#
-	# htmltext = driver.page_source
+	htmltext = driver.page_source
 	#
-	# post_info=make_post_dict(html_doc=htmltext,driver=driver)
+	post_info=make_post_dict(html_doc=htmltext,driver=driver)
+	print(post_info)
 
-	# memberlist=get_club_member_list(LINK,driver=driver)
+	memberlist=get_club_member_list(LINK,driver=driver)
+	print(memberlist)
+	#
+	announcement_list=get_club_announcement_list(LINK=LINK,driver=driver)
 
-
+	make_dataset(post_info=post_info,member_info=memberlist,announcement_info=announcement_list)
+	print(announcement_list)
 
 	# save_json_file(dataset=dataset)
 

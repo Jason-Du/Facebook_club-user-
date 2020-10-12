@@ -33,7 +33,9 @@ if __name__ == '__main__':
 
 	memberlist=cl.get_club_member_list(LINK,driver=driver)
 
-	dataset=cl.make_dataset(post_info=postlist,member_info=memberlist)
+	announcement_list = cl.get_club_announcement_list(LINK=LINK, driver=driver)
+
+	dataset=cl.make_dataset(post_info=postlist,member_info=memberlist,announcement_info=announcement_list)
 
 	cl.save_json_file(dataset=dataset)
 	scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
