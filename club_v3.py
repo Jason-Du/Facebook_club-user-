@@ -520,6 +520,8 @@ def get_club_announcement_list(LINK,driver):
 
 	click_more_content(driver=driver)
 
+	click_more_content(driver=driver)
+
 	htmltext = driver.page_source
 
 	post_info=make_post_dict(html_doc=htmltext,driver=driver)
