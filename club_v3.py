@@ -151,11 +151,10 @@ def make_post_dict(html_doc,driver):
 					try:
 
 						pass
-						pattern = r'div aria-label="Comment by (.+?) '
+						comment_main_name_path = comment.select('span[class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql rrkovp55 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id"]')
+						pattern=r'>(.*?)<'
 						pattern_content = r'>(.*?)<'
-						comment_main=re.findall(pattern,str(comment))
-						# print("comment main name : {}".format(comment_main))
-
+						comment_main=re.findall(pattern,str(comment_main_name_path))
 						#  處理留言區塊
 						singlecomment=comment.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
 						comment_content_list1 = re.findall(pattern_content, str(singlecomment))
@@ -546,7 +545,7 @@ if __name__ == '__main__':
 	PASSWORD = "jason870225"
 
 
-	LINK='https://www.facebook.com/groups/315124296585941'
+	LINK='https://www.facebook.com/groups/342191540266126'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/315124296585941/members
@@ -555,27 +554,27 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=2
+		scroling_times=0
 
 	)
-	# click_more_comment(driver=driver)
+	click_more_comment(driver=driver)
 	#
 	# click_more_comment(driver=driver)
 	#
 	# click_more_content(driver=driver)
 	#
-	# htmltext = driver.page_source
+	htmltext = driver.page_source
 
-	# post_info=make_post_dict(html_doc=htmltext,driver=driver)
-	# print(post_info)
+	post_info=make_post_dict(html_doc=htmltext,driver=driver)
+	print(post_info)
 
 	# memberlist=get_club_member_list(LINK,driver=driver)
 	# print(memberlist)
 	#
-	announcement_list=get_club_announcement_list(LINK=LINK,driver=driver)
+	# announcement_list=get_club_announcement_list(LINK=LINK,driver=driver)
 
 	# make_dataset(post_info=post_info,member_info=memberlist,announcement_info=announcement_list)
-	print(announcement_list)
+	# print(announcement_list)
 
 	# save_json_file(dataset=dataset)
 
