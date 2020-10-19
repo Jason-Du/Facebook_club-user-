@@ -71,6 +71,7 @@ def make_post_dict(html_doc,driver):
 		comment_dict_list = []
 		reaction_list=[]
 		post_dict = {
+			'post_id':'',
 			'poster': '',
 			'post_content': '',
 			'post_share_link': '',
@@ -86,6 +87,7 @@ def make_post_dict(html_doc,driver):
 		poster_name=''.join([str(x) for x in poster_list])
 		# print(poster_name)
 		# PO文者ID
+		post_dict['post_id']=index_post
 		post_dict['poster']=poster_name
 		#五個標籤名 PO文資訊   label_str
 		label_str = post.select('div[class="lzcic4wl"]')[0].get('aria-describedby')
@@ -151,6 +153,7 @@ def make_post_dict(html_doc,driver):
 					try:
 
 						pass
+						# 抓取留言者姓名
 						comment_main_name_path = comment.select('span[class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql rrkovp55 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id"]')
 						pattern=r'>(.*?)<'
 						pattern_content = r'>(.*?)<'
