@@ -227,7 +227,7 @@ def make_post_dict(html_doc,driver):
 				for index_dict,comment_below in enumerate(allcomment_comment):
 
 					comment_below_dict_list = []
-					pattern = r'Reply by (.+?) '
+					pattern = r'Reply by (.*?) to'
 					comment_below_name_list=re.findall(pattern,str(comment_below))
 
 
