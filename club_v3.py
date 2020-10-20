@@ -557,12 +557,12 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=0
+		scroling_times=1
 
 	)
 	click_more_comment(driver=driver)
 	#
-	# click_more_comment(driver=driver)
+
 	#
 	# click_more_content(driver=driver)
 	#
