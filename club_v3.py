@@ -81,7 +81,11 @@ def make_post_dict(html_doc,driver):
 		}
 		# PO 文者 ID
 		poster = post.select('div[class="lzcic4wl"]')[0].get('aria-labelledby')
-		poster=post.select('h2[id={}]'.format(str(poster)))[0].select('div[class="nc684nl6"]')
+		try:
+			poster=post.select('h2[id={}]'.format(str(poster)))[0].select('div[class="nc684nl6"]')
+		except:
+			print('post num{} is not a post'.format(index_post))
+			continue
 		pattern = r'>(.*?)<'
 		poster_list = re.findall(pattern,str(poster))
 		poster_name=''.join([str(x) for x in poster_list])
@@ -544,11 +548,13 @@ def make_dataset(post_info,member_info,announcement_info):
 
 if __name__ == '__main__':
 
-	USERNAME = "dushiun@gmail.com"
-	PASSWORD = "jason870225"
+	# USERNAME = "dushiun@gmail.com"
+	# PASSWORD = "jason870225"
+	USERNAME = 'jason21125@yahoo.com.tw'
+	PASSWORD = 'jason870213'
 
 
-	LINK='https://www.facebook.com/groups/342191540266126'
+	LINK='https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/315124296585941/members
