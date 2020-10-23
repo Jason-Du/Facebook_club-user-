@@ -9,7 +9,7 @@ if __name__ == '__main__':
 	# PASSWORD = "a00264478"
 	# USERNAME = "dushiun@gmail.com"
 	# PASSWORD = "jason870225"
-	USERNAME = 'jason21125 @ yahoo.com.tw'
+	USERNAME = 'jason21125@yahoo.com.tw'
 	PASSWORD = 'jason870213'
 
 	LINK = 'https://www.facebook.com/groups/315124296585941'
