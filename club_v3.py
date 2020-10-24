@@ -62,6 +62,7 @@ def make_post_dict(html_doc,driver):
 	soup = BeautifulSoup(html_doc, 'html.parser')
 	dataset = []
 
+
 	body = soup.find('body')
 	allpost=body.select('div[class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]')
 	real_index_post=0
