@@ -64,10 +64,10 @@ def make_post_dict(html_doc,driver):
 
 	body = soup.find('body')
 	allpost=body.select('div[class="du4w35lb k4urcfbm l9j0dhe7 sjgh65i0"]')
-
+	real_index_post=0
 	print(len(allpost))
 	for index_post,post in enumerate(allpost):
-		print('POST:{} IS ON GOING'.format(index_post))
+		print('POST:{} IS ON GOING'.format(real_index_post))
 		comment_dict_list = []
 		reaction_list=[]
 		post_dict = {
@@ -84,14 +84,15 @@ def make_post_dict(html_doc,driver):
 		try:
 			poster=post.select('h2[id={}]'.format(str(poster)))[0].select('div[class="nc684nl6"]')
 		except:
-			print('post num{} is not a post'.format(index_post))
+			print('post num{} is not a post discard it and jump to next post'.format(real_index_post))
+			real_index_post = real_index_post
 			continue
 		pattern = r'>(.*?)<'
 		poster_list = re.findall(pattern,str(poster))
 		poster_name=''.join([str(x) for x in poster_list])
 		# print(poster_name)
 		# PO文者ID
-		post_dict['post_id']=index_post
+		post_dict['post_id']=real_index_post
 		post_dict['poster']=poster_name
 		#五個標籤名 PO文資訊   label_str
 		label_str = post.select('div[class="lzcic4wl"]')[0].get('aria-describedby')
@@ -212,7 +213,7 @@ def make_post_dict(html_doc,driver):
 					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
 					comment_main_reaction_list=get_comment_emoji_list(driver=driver,
 																	  mode=1,
-																	  post_index=index_post,
+																	  post_index=real_index_post,
 																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
 																	  comment_segment_index=comment_main_index,
 																	  comment_below_segment_path='',
@@ -288,7 +289,7 @@ def make_post_dict(html_doc,driver):
 							pass
 						comment_below_reaction_list = get_comment_emoji_list(driver=driver,
 																			mode=2,
-																			post_index=index_post,
+																			post_index=real_index_post,
 																			comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
 																			comment_segment_index=index_below,
 																			comment_below_segment_path='.//div[@class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]',
@@ -318,12 +319,13 @@ def make_post_dict(html_doc,driver):
 
 
 		# -------------------------------------------------------------------GETTING EMOJI-----------------------------------------------------
-		reaction_list=get_post_emoji_list(driver=driver, post_index=index_post)
+		reaction_list=get_post_emoji_list(driver=driver, post_index=real_index_post)
 		post_dict['reaction']=reaction_list
 		dataset.append(post_dict)
 		# print(dataset[index_post]['reaction'])
 		# os.system('pause')
-		print(dataset[index_post])
+		print(dataset[real_index_post])
+		real_index_post=real_index_post+1
 		# os.system('pause')
 	# print(dataset)
 	# 	print(dataset[index_post]['comment'])
