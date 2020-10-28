@@ -350,6 +350,7 @@ def emoji_data_dealing(emoji_dict_list,driver):
 
 		for emoji_label_index, emoji_label in enumerate(emoji_label_list):
 			try:
+				print("emoji deal label:{}".format(emoji_label_index))
 				emoji_stage1 = row.select(emoji_label)
 				# print("SELECTING SUCCESS {}".format(emoji_label_index))
 				if emoji_label_index == 0:
@@ -378,8 +379,13 @@ def emoji_data_dealing(emoji_dict_list,driver):
 				print("EMOGI STAGE - {}  FAIL".format(emoji_label_index + 1))
 
 		emoji_dict_list.append(emoji_dict)
-
-	close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
+#1029 debug for clicking close button fail thus twice click
+	try:
+		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
+		time.sleep(1)
+	except:
+		print("FAIL FINDIND BUTTON")
+		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 	close_button.click()
 	time.sleep(2)
 	return emoji_dict_list
@@ -456,6 +462,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		# print("NO COMMENT EMOJI BUTTON")
 		pass
 	else:
+		print("postindex{}    comment_segment_index{} ".format(post_index,comment_segment_index))
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
 
