@@ -406,6 +406,7 @@ def get_post_emoji_list(driver, post_index):
 		try:
 			time.sleep(2)
 			emoji_button.send_keys("\n")
+
 			time.sleep(2)
 		except:
 			print("FAIL CLICK POST EMOJI BUTTON")
