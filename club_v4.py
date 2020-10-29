@@ -7,10 +7,10 @@ import  time
 if __name__ == '__main__':
 	# USERNAME = "a00264487@yahoo.com.tw"
 	# PASSWORD = "a00264478"
-	USERNAME = "dushiun@gmail.com"
-	PASSWORD = "jason870225"
-	# USERNAME = 'jason21125@yahoo.com.tw'
-	# PASSWORD = 'jason870213'
+	# USERNAME = "dushiun@gmail.com"
+	# PASSWORD = "jason870225"
+	USERNAME = 'jason21125@yahoo.com.tw'
+	PASSWORD = 'jason870213'
 
 	LINK = 'https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/342191540266126
