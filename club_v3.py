@@ -383,7 +383,7 @@ def emoji_data_dealing(emoji_dict_list,driver):
 	try:
 		time.sleep(2)
 		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
-		close_button.send_keys("\n")
+		close_button.click()
 		time.sleep(2)
 	except:
 		print("FAIL FINDIND BUTTON")
@@ -405,7 +405,7 @@ def get_post_emoji_list(driver, post_index):
 		driver.execute_script("arguments[0].scrollIntoView(false);", emoji_button)
 		try:
 			time.sleep(2)
-			emoji_button.send_keys("\n")
+			emoji_button.click()
 
 			time.sleep(2)
 		except:
@@ -456,7 +456,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		# print('emojitest2')
 		try:
 			time.sleep(2)
-			emoji_button.send_keys("\n")
+			emoji_button.click()
 			time.sleep(2)
 		except:
 			print("FAIL CLICK COMMENT EMOJI BUTTON")
