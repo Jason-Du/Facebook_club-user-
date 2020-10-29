@@ -470,10 +470,14 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 
 def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	pass
-	profile = webdriver.FirefoxProfile()# 新增firefox的設定
-	profile.set_preference("dom.webnotifications.enabled", False)# 將頁面通知關掉
-	profile.update_preferences()# 需要再更新目前firefox新的偏好設定
-	driver = webdriver.Firefox(firefox_profile=profile)
+	# profile = webdriver.FirefoxProfile()# 新增firefox的設定
+	# profile.set_preference("dom.webnotifications.enabled", False)# 將頁面通知關掉
+	# profile.update_preferences()# 需要再更新目前firefox新的偏好設定
+	# driver = webdriver.Firefox(firefox_profile=profile)
+	options = webdriver.ChromeOptions()
+	prefs = {'profile.default_content_settings.popups': 0}
+	options.add_experimental_option('prefs', prefs)
+	driver = webdriver.Chrome(chrome_options=options)
 	driver.get("http://www.facebook.com")
 	time.sleep(2)
 	driver.find_element_by_id("email").send_keys(USERNAME) # 將USERNAME改為你的臉書帳號
