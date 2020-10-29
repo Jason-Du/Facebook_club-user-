@@ -476,7 +476,11 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	# driver = webdriver.Firefox(firefox_profile=profile)
 	options = webdriver.ChromeOptions()
 	prefs = {'profile.default_content_settings.popups': 0}
+	# prefs.put("profile.default_content_setting_values.notifications", 2)
 	options.add_experimental_option('prefs', prefs)
+	options.add_argument("--disable-extensions")
+	options.add_argument("--disable-notifications")
+	# // to	disable	browser	extension	popup
 	driver = webdriver.Chrome(chrome_options=options)
 	driver.get("http://www.facebook.com")
 	time.sleep(2)
