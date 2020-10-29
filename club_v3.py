@@ -456,7 +456,7 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		# print('emojitest2')
 		try:
 			time.sleep(2)
-			emoji_button.click()
+			emoji_button.send_keys("\n")
 			time.sleep(2)
 		except:
 			print("FAIL CLICK COMMENT EMOJI BUTTON")
