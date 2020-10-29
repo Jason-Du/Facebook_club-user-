@@ -574,7 +574,7 @@ if __name__ == '__main__':
 	PASSWORD = 'jason870213'
 
 
-	LINK='https://www.facebook.com/groups/315124296585941'
+	LINK='https://www.facebook.com/groups/342191540266126'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/315124296585941/members
