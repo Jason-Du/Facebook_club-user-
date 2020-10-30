@@ -265,8 +265,11 @@ def make_post_dict(html_doc,driver):
 											  }
 						comment_below_dict['comment_id'] = comment_below_name
 				# 		#留言下的single留言區塊 下的留言區塊
-				# 		l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80
-						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]')[index_below]
+				# 	09	l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80
+				#  1001 l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl
+				#  1030 l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl
+						comment_below2 = comment_below.select('div[class="l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]')[index_below]
+						# print('debug index below comment{} comment_below2 {}'.format(index_below,comment_below2))
 						try:
 							comment_below3=comment_below2.select('div[class="kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x c1et5uql"]')
 							pattern_below_content = r'>(.*?)<'
