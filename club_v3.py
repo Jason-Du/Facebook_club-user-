@@ -5,12 +5,20 @@ import os
 import time
 import re
 import json
+import random
 
 def click_more_comment(driver):
 	pass
 	post=driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")
 	print("CLICK MORE COMMENT ON GOING")
 	print("POST NUMBER:{}".format(len(post)))
+	# cookie test##########################################
+	# driver.delete_all_cookies()
+	# time.sleep(2)
+	# lst = driver.get_cookies()
+	# for cookie in lst:
+	# 	print(cookie)
+	# cookie test##########################################
 	for i in post:
 		try:
 			driver.execute_script("arguments[0].scrollIntoView(false);", i)
@@ -133,14 +141,19 @@ def make_post_dict(html_doc,driver):
 
 		# ----------------------------------------------------------Comment---------------------------------------------------------------------------
 		# 主留言 與 留言下留言分類區塊
+		#  DEBUG
 		# 主留言 l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
+
+		# 1001 主留言 l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
+
+		# 1030 主留言 l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
 		#
-		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
+		comment_labellist=['div[class="l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
 						   'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]']
 		for index_label,label in enumerate(comment_labellist):
 
 			if index_label==0:
-
+				print('debug stage1')
 				# 主留言
 				allcomment = post.select(label)
 				for comment_main_index,comment in enumerate(allcomment):
@@ -156,6 +169,7 @@ def make_post_dict(html_doc,driver):
 						'comment_reaction': [],
 					}
 					# comment 為 單個的主流言
+					print('debug stage2')
 					try:
 
 						pass
@@ -222,6 +236,7 @@ def make_post_dict(html_doc,driver):
 																	  )
 					comment_dict['comment_reaction']=comment_main_reaction_list
 					comment_dict_list.append(comment_dict)
+					print('debug comment_dict_list'.format(comment_dict_list))
 					# 列印出主留言
 					# print(comment_dict_list[comment_main_index])
 					# print('--------------------------------------------------------')
@@ -296,14 +311,12 @@ def make_post_dict(html_doc,driver):
 																			comment_below_segment_path='.//div[@class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]',
 																			comment_below_segment_index=index_dict
 																			)
-																													# 'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]'
-
-
+																							# 'div[class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]'
 						comment_below_dict['comment_reaction']=comment_below_reaction_list
 						comment_below_dict_list.append(comment_below_dict)
 
 
-
+					print('debug index_dict{}'.format(index_dict))
 					comment_dict_list[index_dict]['comment_below']=comment_below_dict_list
 					# # 列印出該則PO文底下的所有留言
 					# print(comment_dict_list[index_dict])
@@ -381,12 +394,12 @@ def emoji_data_dealing(emoji_dict_list,driver):
 		emoji_dict_list.append(emoji_dict)
 #1029 debug for clicking close button fail thus twice click
 	try:
-		time.sleep(2)
 		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 		close_button.click()
-		time.sleep(2)
+
+		time.sleep(random.randint(2, 4))
 	except:
-		print("FAIL FINDIND BUTTON")
+		print(" debug FAIL FINDIND BUTTON")
 		# close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 
 	return emoji_dict_list
@@ -464,24 +477,30 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		# print("NO COMMENT EMOJI BUTTON")
 		pass
 	else:
-		print("postindex{}    comment_segment_index{} ".format(post_index,comment_segment_index))
+		print("debug postindex {}    comment_segment_index {} ".format(post_index,comment_segment_index))
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
 
 def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	pass
-	# profile = webdriver.FirefoxProfile()# 新增firefox的設定
-	# profile.set_preference("dom.webnotifications.enabled", False)# 將頁面通知關掉
-	# profile.update_preferences()# 需要再更新目前firefox新的偏好設定
-	# driver = webdriver.Firefox(firefox_profile=profile)
-	options = webdriver.ChromeOptions()
-	prefs = {'profile.default_content_settings.popups': 0}
-	# prefs.put("profile.default_content_setting_values.notifications", 2)
-	options.add_experimental_option('prefs', prefs)
-	options.add_argument("--disable-extensions")
-	options.add_argument("--disable-notifications")
-	# // to	disable	browser	extension	popup
-	driver = webdriver.Chrome(chrome_options=options)
+	profile = webdriver.FirefoxProfile()# 新增firefox的設定
+	# DEBUG 新增設定 清除CACHE
+	profile.set_preference("browser.cache.disk.enable", False)
+	profile.set_preference("browser.cache.memory.enable", False)
+	profile.set_preference("browser.cache.offline.enable", False)
+	profile.set_preference("network.http.use-cache", False)
+	profile.set_preference("network.dns.disableIPv6", True)
+	profile.set_preference("dom.webnotifications.enabled", False)# 將頁面通知關掉
+	profile.update_preferences()# 需要再更新目前firefox新的偏好設定
+	driver = webdriver.Firefox(firefox_profile=profile)
+	# options = webdriver.ChromeOptions()
+	# prefs = {'profile.default_content_settings.popups': 0}
+	# options.add_experimental_option('prefs', prefs)
+	# options.add_argument("--disable-extensions")
+	# options.add_argument("--disable-notifications")
+	# # // to	disable	browser	extension	popup
+	# driver = webdriver.Chrome(chrome_options=options)
+
 	driver.get("http://www.facebook.com")
 	time.sleep(2)
 	driver.find_element_by_id("email").send_keys(USERNAME) # 將USERNAME改為你的臉書帳號
@@ -568,10 +587,10 @@ def make_dataset(post_info,member_info,announcement_info):
 
 if __name__ == '__main__':
 
-	# USERNAME = "dushiun@gmail.com"
-	# PASSWORD = "jason870225"
-	USERNAME = 'jason21125@yahoo.com.tw'
-	PASSWORD = 'jason870213'
+	USERNAME = "dushiun@gmail.com"
+	PASSWORD = "jason870225"
+	# USERNAME = 'jason21125@yahoo.com.tw'
+	# PASSWORD = 'jason870213'
 
 
 	LINK='https://www.facebook.com/groups/342191540266126'
