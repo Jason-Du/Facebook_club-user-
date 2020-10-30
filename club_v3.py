@@ -226,10 +226,11 @@ def make_post_dict(html_doc,driver):
 						pass
 					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
 					# l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a lzcic4wl btwxx1t3 j83agx80
+					# l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl
 					comment_main_reaction_list=get_comment_emoji_list(driver=driver,
 																	  mode=1,
 																	  post_index=real_index_post,
-																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
+																	  comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 dati1w0a j83agx80 btwxx1t3 lzcic4wl"]',
 																	  comment_segment_index=comment_main_index,
 																	  comment_below_segment_path='',
 																	  comment_below_segment_index=''
@@ -264,7 +265,7 @@ def make_post_dict(html_doc,driver):
 											  'comment_reaction':[]
 											  }
 						comment_below_dict['comment_id'] = comment_below_name
-				# 		#留言下的single留言區塊 下的留言區塊
+				# 		#留言下的single留言區塊 下的留言區塊 debug
 				# 	09	l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr lzcic4wl btwxx1t3 j83agx80
 				#  1001 l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl
 				#  1030 l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl
@@ -309,7 +310,7 @@ def make_post_dict(html_doc,driver):
 						comment_below_reaction_list = get_comment_emoji_list(driver=driver,
 																			mode=2,
 																			post_index=real_index_post,
-																			comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt hv4rvrfc qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
+																			comment_segment_path='.//div[@class="l9j0dhe7 ecm0bbzt rz4wbd8a qt6c0cv9 scb9dxdr j83agx80 btwxx1t3 lzcic4wl"]',
 																			comment_segment_index=index_below,
 																			comment_below_segment_path='.//div[@class="kvgmc6g5 jb3vyjys rz4wbd8a qt6c0cv9 d0szoon8"]',
 																			comment_below_segment_index=index_dict
