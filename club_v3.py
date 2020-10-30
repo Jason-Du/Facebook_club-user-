@@ -153,7 +153,7 @@ def make_post_dict(html_doc,driver):
 		for index_label,label in enumerate(comment_labellist):
 
 			if index_label==0:
-				print('debug stage1')
+				# print('debug stage1')
 				# 主留言
 				allcomment = post.select(label)
 				for comment_main_index,comment in enumerate(allcomment):
@@ -169,7 +169,7 @@ def make_post_dict(html_doc,driver):
 						'comment_reaction': [],
 					}
 					# comment 為 單個的主流言
-					print('debug stage2')
+					# print('debug stage2')
 					try:
 
 						pass
@@ -236,7 +236,7 @@ def make_post_dict(html_doc,driver):
 																	  )
 					comment_dict['comment_reaction']=comment_main_reaction_list
 					comment_dict_list.append(comment_dict)
-					print('debug comment_dict_list'.format(comment_dict_list))
+					# print('debug comment_dict_list'.format(comment_dict_list))
 					# 列印出主留言
 					# print(comment_dict_list[comment_main_index])
 					# print('--------------------------------------------------------')
