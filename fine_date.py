@@ -15,5 +15,4 @@ def save_json_file_for_fine_dataset():
 
 if __name__ == '__main__':
     save_json_file_for_fine_dataset()
-    upload.main(is_update_file_function=bool(True), update_drive_service_name='fine_dataset.json',
-                update_file_path=os.getcwd() + '/')
+    upload.main(is_update_file_function=bool(True), update_drive_service_name='fine_dataset.json',update_file_path=os.getcwd() + '/')
