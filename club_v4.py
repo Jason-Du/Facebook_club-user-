@@ -19,7 +19,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=12
+		scroling_times=13
 
 
 	)
