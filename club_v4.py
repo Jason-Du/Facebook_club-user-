@@ -10,8 +10,10 @@ if __name__ == '__main__':
 	# PASSWORD = "a00264478"
 	# USERNAME = "dushiun@gmail.com"
 	# PASSWORD = "jason870225"
-	USERNAME = 'jason21125@yahoo.com.tw'
-	PASSWORD = 'jason870213'
+	# USERNAME = 'jason21125@yahoo.com.tw'
+	# PASSWORD = 'jason870213'
+	USERNAME = "dushiuncomputing@gmail.com"
+	PASSWORD = "jason870225"
 	LINK = 'https://www.facebook.com/groups/315124296585941'
 	# https://www.facebook.com/groups/342191540266126
 	# 'https://www.facebook.com/groups/315124296585941'
@@ -19,10 +21,10 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=13
-
-
+		scroling_times=25
 	)
+
+	cl.click_more_comment(driver=driver)
 
 	cl.click_more_comment(driver=driver)
 
