@@ -510,9 +510,16 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 	driver.find_element_by_id("email").send_keys(USERNAME) # 將USERNAME改為你的臉書帳號
 	driver.find_element_by_id("pass").send_keys(PASSWORD) # 將PASSWORD改為你的臉書密碼
 	try:
-		driver.find_element_by_id("u_0_b").click()
+		# driver.find_element_by_id("u_0_d_aK").click()
+		python_button=driver.find_elements_by_xpath("//*[@class='_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy']")[0]
+		# python_button=driver.find_element_by_class_name('_42ft _4jy0 _6lth _4jy6 _4jy1 selected _51sy')
+		# time.sleep(1)
+		print(python_button)
+		python_button.click()
 	except:
-		driver.find_element_by_id("u_0_4").click()
+		print("LOGIN BUTTON FAIL")
+		os.system("pause")
+		# driver.find_element_by_id("u_0_d_51").click()
 	time.sleep(2)
 	driver.get(LINK)
 	time.sleep(3)
@@ -606,14 +613,14 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=1
+		scroling_times=2
 
 	)
 	click_more_comment(driver=driver)
 	#
 
 	#
-	# click_more_content(driver=driver)
+	click_more_content(driver=driver)
 	#
 	htmltext = driver.page_source
 
