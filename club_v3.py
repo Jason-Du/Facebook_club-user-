@@ -6,6 +6,9 @@ import time
 import re
 import json
 import random
+def click_more_comment_check(driver):
+	html=driver.page_source
+
 
 def click_more_comment(driver):
 	pass
@@ -19,7 +22,7 @@ def click_more_comment(driver):
 	# for cookie in lst:
 	# 	print(cookie)
 	# cookie test##########################################
-	for i in post:
+	for post_num,i in enumerate(post):
 		try:
 			driver.execute_script("arguments[0].scrollIntoView(false);", i)
 			time.sleep(2)
@@ -30,11 +33,16 @@ def click_more_comment(driver):
 			for j in more_comment:
 				try:
 					driver.execute_script("arguments[0].scrollIntoView(false);",j)
+					# print(str(j.text))
+					if(bool(re.search("Hide",j.text))==True):
+						break
 					time.sleep(2)
 					j.click()
 					time.sleep(2)
 				except:
-					print("FAIL CLICK more_comment")
+					print("POST{} FAIL CLICK more_comment".format(post_num))
+					# print(str(j.text))
+					# os.system("pause")
 		except:
 			print("NO more_comment BUTTON")
 			pass
@@ -46,7 +54,7 @@ def click_more_content(driver):
 	post = driver.find_elements_by_xpath("//div[@class='du4w35lb k4urcfbm l9j0dhe7 sjgh65i0']")
 	print("CLICK MORE CONTENT ON GOING")
 	print("POST NUMBER:{}".format(len(post)))
-	for i in post:
+	for post_num,i in enumerate(post):
 		try:
 			driver.execute_script("arguments[0].scrollIntoView(false);", i)
 			time.sleep(2)
@@ -56,11 +64,16 @@ def click_more_content(driver):
 			for j in more_content:
 				try:
 					driver.execute_script("arguments[0].scrollIntoView(false);",j)
+					if (bool(re.search("See More", j.text)) == False):
+						break
+					# print(j.text)
 					time.sleep(2)
 					j.click()
 					time.sleep(2)
 				except:
-					print("FAIL CLICK more_content BUTTON")
+					print("POST{} FAIL CLICK more_content BUTTON".format(post_num))
+					# print(j.text)
+					# os.system("pause")
 		except:
 
 			print("NO more_content BUTTON")
@@ -174,7 +187,8 @@ def make_post_dict(html_doc,driver):
 
 						pass
 						# 抓取留言者姓名
-						comment_main_name_path = comment.select('span[class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql rrkovp55 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id"]')
+						comment_main_name_path = comment.select('span[class="d2edcug0 hpfvmrgz qv66sw1b c1et5uql lr9zc1uh a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id"]')
+						# d2edcug0 hpfvmrgz qv66sw1b c1et5uql rrkovp55 a8c37x1j keod5gw0 nxhoafnm aigsh9s9 d9wwppkn fe6kdd0r mau55g9w c8b282yb mdeji52x e9vueds3 j5wam9gi lrazzd5p oo9gr5id 0414
 						pattern=r'>(.*?)<'
 						pattern_content = r'>(.*?)<'
 						comment_main=re.findall(pattern,str(comment_main_name_path))
@@ -354,10 +368,10 @@ def emoji_data_dealing(emoji_dict_list,driver):
 	emoji_htmltxt = driver.page_source
 	soup_emoji = BeautifulSoup(emoji_htmltxt, 'html.parser')
 
-	emoji_window = soup_emoji.select('div[class="l9j0dhe7 tkr6xdv7"]')[0]
-
+	emoji_window = soup_emoji.select('div[class="__fb-light-mode l9j0dhe7 tkr6xdv7"]')[0]
+	emoji_window_below_part=emoji_window.select('div[class="j83agx80 cbu4d94t buofh1pr l9j0dhe7"]')[0]
 	# 單一EMOJI USER 區塊
-	emoji_individual_row = emoji_window.select('div[data-visualcompletion="ignore-dynamic"]')
+	emoji_individual_row = emoji_window_below_part.select('div[data-visualcompletion="ignore-dynamic"]')
 	for row in emoji_individual_row:
 		emoji_dict = {'emoji_id': '',
 					  'emoji_type': ''
@@ -367,7 +381,7 @@ def emoji_data_dealing(emoji_dict_list,driver):
 
 		for emoji_label_index, emoji_label in enumerate(emoji_label_list):
 			try:
-				print("emoji deal label:{}".format(emoji_label_index))
+				# print("emoji deal label:{}".format(emoji_label_index))
 				emoji_stage1 = row.select(emoji_label)
 				# print("SELECTING SUCCESS {}".format(emoji_label_index))
 				if emoji_label_index == 0:
@@ -379,23 +393,25 @@ def emoji_data_dealing(emoji_dict_list,driver):
 
 				if emoji_label_index == 1:
 					label_response = {
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yv/r/dOJFaVZihS_.png': 'LIKE',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yf/r/p_-PTXnrxIv.png': 'CARE',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yP/r/dhZwLwMz9U7.png': 'SAD',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yH/r/i6eZvvUMZW5.png': 'ANGRY',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/yzxDz4ZUD49.png': 'HAHA',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yn/r/qZOYbiV8BHS.png': 'WOW',
-						'https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/emi3_1IpGVz.png': 'LOVE',
+						'https://scontent.xx.fbcdn.net/m1/v/An8JkpVv4NEzRagilLipZW9eAICo35S1A0gUa4zw4Kr53H6QUj1q7YbT6GS0zMJlLCmB4Wbxqu-bGVq1U-a3JrxL3l7S5zaUNIcxYJ4uUPCNDlXP': 'LIKE',
+						'https://scontent.xx.fbcdn.net/m1/v/An-eYNxVwba0wRnEA-d76ymjFj_xlEq1T0rnOlw9cXZvd9NV6OlI1X1M65yqQ2Ty1QuNQiVfzmfhn3bAWswz62oubWpvy0QiBkywBbYsoOcDmRTEIc9T': 'CARE',
+						'https://scontent.xx.fbcdn.net/m1/v/An_jJ1nMvYBvga64HF0IHQVbDaJ9ZZ_vqvFfEkKdylchLsszYtXN2gwdh66zpE0wF0aYKv-xc8a-eZ8Js-8v7U5tLHbdRgKREz_QwfdpBYw58UhnXQ': 'SAD',
+						'https://scontent.xx.fbcdn.net/m1/v/An-ZyF_zEOJ1_yJh_zPGSRxDwnhaw3vaQPln0lvtl4k6fJF_2_6HxNmlcNxO7JOKGqiHT47T_WT9B7QsRpqJeDVvist1cde3YJ3mCMK0A6yjn-D-': 'ANGRY',
+						'https://scontent.xx.fbcdn.net/m1/v/An-zv1qPExxz6a32zPrT6S6dY0H9YUfKQV5G2GtGfFkE-CFn00-Lq99Pp-0jUQwcEXXPxYjbZXZoE416bpzpqaYFNgTSXlvM4nCbmBfRzzGxNu8': 'HAHA',
+						'https://scontent.xx.fbcdn.net/m1/v/An__wcku2C9egUdf94a5F1z38LKlNYEI-g0uLs0fHp8P_O_BCnO_5G1eYl98T_oRrRvFt2TeJO9z7Kn2px0MJFqjvZsZw6gGAhzX1fLhIoNydmCt': 'WOW',
+						'https://scontent.xx.fbcdn.net/m1/v/An9tU9mltzRvDoDeXQEJFl0TPMhk16ErJvLOtTBVW19D9Ks5FI_j6pZG-fFN3eJkOijusD5KWbb-YUjyv4WE1hCqkOc3spA_jeOHZBc-iWlwewzM': 'LOVE',
 					}
-					type_pattern = r'src="(.*?)"'
+					type_pattern = r'src="(.*?).png'
 					emoji_type2 = re.findall(type_pattern, str(emoji_stage1))[0]
+
 					emoji_decode = label_response[str(emoji_type2)]
 					# print(emoji_decode)
 					emoji_dict['emoji_type'] = emoji_decode
+					emoji_dict_list.append(emoji_dict)
 			except:
 				print("EMOGI STAGE - {}  FAIL".format(emoji_label_index + 1))
-
-		emoji_dict_list.append(emoji_dict)
+				# print(str(emoji_stage1))
+				# print(str(emoji_type2))
 #1029 debug for clicking close button fail thus twice click
 	try:
 		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
@@ -405,7 +421,6 @@ def emoji_data_dealing(emoji_dict_list,driver):
 	except:
 		print(" debug FAIL FINDIND BUTTON")
 		# close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
-
 	return emoji_dict_list
 
 
@@ -423,15 +438,17 @@ def get_post_emoji_list(driver, post_index):
 		try:
 			time.sleep(2)
 			emoji_button.click()
-
 			time.sleep(2)
+
 		except:
 			print("FAIL CLICK POST EMOJI BUTTON")
 	except:
-		# print("NO POST EMOJI BUTTOM")
+		print("NO POST EMOJI BUTTOM")
 		pass
 	else:
-		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
+		emoji_dict_list = emoji_data_dealing(emoji_dict_list=emoji_dict_list, driver=driver)
+	# finally:
+	# os.system("pause")
 	return emoji_dict_list
 
 
@@ -478,10 +495,11 @@ def get_comment_emoji_list(mode,driver,post_index,comment_below_segment_path,com
 		except:
 			print("FAIL CLICK COMMENT EMOJI BUTTON")
 	except:
-		# print("NO COMMENT EMOJI BUTTON")
+		print("NO COMMENT EMOJI BUTTON")
 		pass
 	else:
-		print("debug postindex {}    comment_segment_index {} ".format(post_index,comment_segment_index))
+		pass
+		# print("debug postindex {}    comment_segment_index {} ".format(post_index,comment_segment_index))
 		emoji_dict_list=emoji_data_dealing(emoji_dict_list=emoji_dict_list,driver=driver)
 	return emoji_dict_list
 
@@ -518,7 +536,7 @@ def set_up(USERNAME,PASSWORD,LINK,scroling_times):
 		python_button.click()
 	except:
 		print("LOGIN BUTTON FAIL")
-		os.system("pause")
+		# os.system("pause")
 		# driver.find_element_by_id("u_0_d_51").click()
 	time.sleep(2)
 	driver.get(LINK)
@@ -613,14 +631,14 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=2
+		scroling_times=1
 
 	)
-	click_more_comment(driver=driver)
+	# click_more_comment(driver=driver)
 	#
 
 	#
-	click_more_content(driver=driver)
+	# click_more_content(driver=driver)
 	#
 	htmltext = driver.page_source
 

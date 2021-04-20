@@ -15,7 +15,7 @@ if __name__ == '__main__':
 	# USERNAME = 'jason21125@yahoo.com.tw'
 	# PASSWORD = 'jason870213'
 
-	LINK = 'https://www.facebook.com/groups/342191540266126'
+	LINK = 'https://www.facebook.com/groups/226764065753401'
 	# https://www.facebook.com/groups/342191540266126
 
 	# 'https://www.facebook.com/groups/315124296585941'
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=30
+		scroling_times=15
 	)
 
 	cl.click_more_comment(driver=driver)
@@ -33,13 +33,15 @@ if __name__ == '__main__':
 	cl.click_more_comment(driver=driver)
 
 	cl.click_more_comment(driver=driver)
-
+	# print("COMMENT_DONE")
+	# os.system("pause")
 	cl.click_more_content(driver=driver)
-
+	# print("CONTENT_DONE")
+	# os.system("pause")
 	htmltext = driver.page_source
 
 	postlist = cl.make_post_dict(html_doc=htmltext, driver=driver)
-
+	# os.system("pause")
 	memberlist=cl.get_club_member_list(LINK,driver=driver)
 
 	announcement_list = cl.get_club_announcement_list(LINK=LINK, driver=driver)

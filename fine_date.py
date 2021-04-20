@@ -4,7 +4,7 @@ import os
 import re
 import time
 def save_json_file_for_fine_dataset():
-    date_list = ['1021', '1022', '1023','1110', '1111', '1112','1116','1117','1118','1119','1120','1208','1214','1225',"1231","0104"]
+    date_list = ["0322","0420"]
     # scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     # time_pattern = r'\d{4}-(\d{2})-(\d{2})(\s)(\d{2}):(\d{2}):\d{2}'
     # time_list = re.findall(time_pattern, scratch_time)[0]
