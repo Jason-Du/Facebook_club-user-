@@ -178,7 +178,7 @@ def make_post_dict(html_doc,driver):
 						'comment_gif_num': '',
 						'comment_img_num': '',
 						'comment_sticker': '',
-						'comment_below': '',
+						'comment_below': [],
 						'comment_reaction': [],
 					}
 					# comment 為 單個的主流言
@@ -392,16 +392,19 @@ def emoji_data_dealing(emoji_dict_list,driver):
 					emoji_dict['emoji_id'] = emoji_name
 
 				if emoji_label_index == 1:
+					#
 					label_response = {
-						'https://scontent.xx.fbcdn.net/m1/v/An8JkpVv4NEzRagilLipZW9eAICo35S1A0gUa4zw4Kr53H6QUj1q7YbT6GS0zMJlLCmB4Wbxqu-bGVq1U-a3JrxL3l7S5zaUNIcxYJ4uUPCNDlXP': 'LIKE',
-						'https://scontent.xx.fbcdn.net/m1/v/An-eYNxVwba0wRnEA-d76ymjFj_xlEq1T0rnOlw9cXZvd9NV6OlI1X1M65yqQ2Ty1QuNQiVfzmfhn3bAWswz62oubWpvy0QiBkywBbYsoOcDmRTEIc9T': 'CARE',
-						'https://scontent.xx.fbcdn.net/m1/v/An_jJ1nMvYBvga64HF0IHQVbDaJ9ZZ_vqvFfEkKdylchLsszYtXN2gwdh66zpE0wF0aYKv-xc8a-eZ8Js-8v7U5tLHbdRgKREz_QwfdpBYw58UhnXQ': 'SAD',
-						'https://scontent.xx.fbcdn.net/m1/v/An-ZyF_zEOJ1_yJh_zPGSRxDwnhaw3vaQPln0lvtl4k6fJF_2_6HxNmlcNxO7JOKGqiHT47T_WT9B7QsRpqJeDVvist1cde3YJ3mCMK0A6yjn-D-': 'ANGRY',
-						'https://scontent.xx.fbcdn.net/m1/v/An-zv1qPExxz6a32zPrT6S6dY0H9YUfKQV5G2GtGfFkE-CFn00-Lq99Pp-0jUQwcEXXPxYjbZXZoE416bpzpqaYFNgTSXlvM4nCbmBfRzzGxNu8': 'HAHA',
-						'https://scontent.xx.fbcdn.net/m1/v/An__wcku2C9egUdf94a5F1z38LKlNYEI-g0uLs0fHp8P_O_BCnO_5G1eYl98T_oRrRvFt2TeJO9z7Kn2px0MJFqjvZsZw6gGAhzX1fLhIoNydmCt': 'WOW',
-						'https://scontent.xx.fbcdn.net/m1/v/An9tU9mltzRvDoDeXQEJFl0TPMhk16ErJvLOtTBVW19D9Ks5FI_j6pZG-fFN3eJkOijusD5KWbb-YUjyv4WE1hCqkOc3spA_jeOHZBc-iWlwewzM': 'LOVE',
+						'An8JkpVv4NEzRagilLipZW9eAICo35S1A0gUa4zw4Kr53H6QUj1q7YbT6GS0zMJlLCmB4Wbxqu-bGVq1U-a3JrxL3l7S5zaUNIcxYJ4uUPCNDlXP': 'LIKE',
+						# https://scontent.fsub2-2.fna.fbcdn.net/m1/v/An8JkpVv4NEzRagilLipZW9eAICo35S1A0gUa4zw4Kr53H6QUj1q7YbT6GS0zMJlLCmB4Wbxqu-bGVq1U-a3JrxL3l7S5zaUNIcxYJ4uUPCNDlXP.png
+						'An-eYNxVwba0wRnEA-d76ymjFj_xlEq1T0rnOlw9cXZvd9NV6OlI1X1M65yqQ2Ty1QuNQiVfzmfhn3bAWswz62oubWpvy0QiBkywBbYsoOcDmRTEIc9T': 'CARE',
+						'An_jJ1nMvYBvga64HF0IHQVbDaJ9ZZ_vqvFfEkKdylchLsszYtXN2gwdh66zpE0wF0aYKv-xc8a-eZ8Js-8v7U5tLHbdRgKREz_QwfdpBYw58UhnXQ': 'SAD',
+						'An-ZyF_zEOJ1_yJh_zPGSRxDwnhaw3vaQPln0lvtl4k6fJF_2_6HxNmlcNxO7JOKGqiHT47T_WT9B7QsRpqJeDVvist1cde3YJ3mCMK0A6yjn-D-': 'ANGRY',
+						'An-zv1qPExxz6a32zPrT6S6dY0H9YUfKQV5G2GtGfFkE-CFn00-Lq99Pp-0jUQwcEXXPxYjbZXZoE416bpzpqaYFNgTSXlvM4nCbmBfRzzGxNu8': 'HAHA',
+						# 'https://scontent.fdps4-1.fna.fbcdn.net/m1/v/An__wcku2C9egUdf94a5F1z38LKlNYEI-g0uLs0fHp8P_O_BCnO_5G1eYl98T_oRrRvFt2TeJO9z7Kn2px0MJFqjvZsZw6gGAhzX1fLhIoNydmCt': 'WOW',
+						"An__wcku2C9egUdf94a5F1z38LKlNYEI-g0uLs0fHp8P_O_BCnO_5G1eYl98T_oRrRvFt2TeJO9z7Kn2px0MJFqjvZsZw6gGAhzX1fLhIoNydmCt":"WOW",
+						'An9tU9mltzRvDoDeXQEJFl0TPMhk16ErJvLOtTBVW19D9Ks5FI_j6pZG-fFN3eJkOijusD5KWbb-YUjyv4WE1hCqkOc3spA_jeOHZBc-iWlwewzM': 'LOVE',
 					}
-					type_pattern = r'src="(.*?).png'
+					type_pattern = r'/m1/v/(.*?).png'
 					emoji_type2 = re.findall(type_pattern, str(emoji_stage1))[0]
 
 					emoji_decode = label_response[str(emoji_type2)]
@@ -410,16 +413,17 @@ def emoji_data_dealing(emoji_dict_list,driver):
 					emoji_dict_list.append(emoji_dict)
 			except:
 				print("EMOGI STAGE - {}  FAIL".format(emoji_label_index + 1))
+				os.system("pause")
 				# print(str(emoji_stage1))
 				# print(str(emoji_type2))
 #1029 debug for clicking close button fail thus twice click
 	try:
 		close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 		close_button.click()
-
 		time.sleep(random.randint(2, 4))
 	except:
 		print(" debug FAIL FINDIND BUTTON")
+		os.system("pause")
 		# close_button = driver.find_elements_by_xpath('//div[@class="oajrlxb2 tdjehn4e qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl l9j0dhe7 abiwlrkh p8dawk7l bp9cbjyn s45kfl79 emlxlaya bkmhp75w spb7xbtv rt8b4zig n8ej3o3l agehan2d sk4xxmp2 taijpn5t tv7at329 thwo4zme"]')[0]
 	return emoji_dict_list
 
@@ -552,8 +556,8 @@ def save_json_file(dataset):
 	time_list = re.findall(time_pattern, scratch_time)[0]
 	finishtime = str(time_list[0] + time_list[1])
 	print(finishtime)
-	with open(finishtime+'.json', 'w') as fp:
-		json.dump(dataset, fp,indent=4)
+	with open(finishtime+'.json', 'w',encoding='utf-8') as fp:
+		json.dump(dataset, fp,indent=4,ensure_ascii=False)
 
 def get_club_member_list(LINK,driver):
 	# 抓取社團名單

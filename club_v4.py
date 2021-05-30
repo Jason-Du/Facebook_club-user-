@@ -3,7 +3,7 @@ import upload
 import os
 import re
 import  time
-
+import json
 
 if __name__ == '__main__':
 	# USERNAME = "a00264487@yahoo.com.tw"
@@ -23,7 +23,7 @@ if __name__ == '__main__':
 		USERNAME=USERNAME,
 		PASSWORD=PASSWORD,
 		LINK=LINK,
-		scroling_times=15
+		scroling_times=25
 	)
 
 	cl.click_more_comment(driver=driver)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 	cl.click_more_comment(driver=driver)
 
 	cl.click_more_comment(driver=driver)
-	# print("COMMENT_DONE")
+	print("COMMENT_DONE")
 	# os.system("pause")
 	cl.click_more_content(driver=driver)
 	# print("CONTENT_DONE")
@@ -49,6 +49,7 @@ if __name__ == '__main__':
 	dataset=cl.make_dataset(post_info=postlist,member_info=memberlist,announcement_info=announcement_list)
 
 	cl.save_json_file(dataset=dataset)
+
 	scratch_time = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 	time_pattern = r'\d{4}-(\d{2})-(\d{2})(\s)(\d{2}):(\d{2}):\d{2}'
 	time_list = re.findall(time_pattern, scratch_time)[0]
